@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="SpendWise.API/SpendWise.API.csproj" />
+  <Project Path="SpendWise.Domain/SpendWise.Domain.csproj" />
+  <Project Path="SpendWise.Infrastructure/SpendWise.Infrastructure.csproj" />
+</Solution>
