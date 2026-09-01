@@ -1,12 +1,15 @@
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SpendWise.Domain.Entities;
 using SpendWise.Infrastructure.Data;
+using SpendWise.Infrastructure.Identity;
 
 namespace SpendWise.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -20,14 +23,28 @@ namespace SpendWise.API
             builder.Services.AddDbContext<SpendWiseDbContext>(options=>
             options.UseSqlServer(builder.Configuration.GetConnectionString("SpendWiseConnection")));
 
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<SpendWiseDbContext>()
+                .AddDefaultTokenProviders();
+
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            //Invoke runtime seeder
+            using (var scope= app.Services.CreateScope())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                await IdentitySeeder.SeedAsync(userManager, roleManager,builder.Configuration);
+
             }
+
+                // Configure the HTTP request pipeline.
+                if (app.Environment.IsDevelopment())
+                {
+                    app.UseSwagger();
+                    app.UseSwaggerUI();
+                }
 
             app.UseHttpsRedirection();
 
@@ -36,7 +53,7 @@ namespace SpendWise.API
 
             app.MapControllers();
 
-            app.Run();
+            await app.RunAsync();
         }
     }
 }
