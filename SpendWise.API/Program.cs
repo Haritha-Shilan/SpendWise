@@ -1,10 +1,3 @@
-
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using SpendWise.Domain.Entities;
-using SpendWise.Infrastructure.Data;
-using SpendWise.Infrastructure.Identity;
-
 namespace SpendWise.API
 {
     public class Program
@@ -20,12 +13,25 @@ namespace SpendWise.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            //DbContext
             builder.Services.AddDbContext<SpendWiseDbContext>(options=>
             options.UseSqlServer(builder.Configuration.GetConnectionString("SpendWiseConnection")));
 
+            //IdentityContext
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<SpendWiseDbContext>()
                 .AddDefaultTokenProviders();
+
+            //Generic Repository
+            builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            //Mapper
+            builder.Services.AddAutoMapper(cfg =>
+            { 
+            }, typeof(MappingProfile));
+
+            //Add Feature Services
+            builder.Services.AddScoped<ICategoryMasterService, CategoryMasterService>();
 
             var app = builder.Build();
 

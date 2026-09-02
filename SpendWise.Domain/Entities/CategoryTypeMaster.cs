@@ -1,6 +1,4 @@
-﻿using SpendWise.Domain.Interface;
-
-namespace SpendWise.Domain.Entities
+﻿namespace SpendWise.Domain.Entities
 {
     public class CategoryTypeMaster:IEntity
     {

@@ -1,0 +1,12 @@
+﻿global using SpendWise.Infrastructure.Repositories;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.EntityFrameworkCore;
+global using SpendWise.Domain.Entities;
+global using SpendWise.Infrastructure.Data;
+global using SpendWise.Infrastructure.Identity;
+global using SpendWise.API.Mapping;
+global using SpendWise.API.Features.CategoryMaster.DTOs;
+global using SpendWise.API.Features.CategoryMaster;
+global using Microsoft.AspNetCore.Mvc;
+global using System.ComponentModel.DataAnnotations;
+global using SpendWise.API.Common;
