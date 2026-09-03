@@ -6,11 +6,13 @@ namespace SpendWise.API.Features.CategoryMaster
     {
         private readonly IRepository<CategoryMasterEntity> _repository;
         private readonly IRepository<CategoryTypeMaster> _categoryTypeRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public CategoryMasterService(IRepository<CategoryMasterEntity> repository, IRepository<CategoryTypeMaster> categoryTypeRepository, IMapper mapper)
+        public CategoryMasterService(IRepository<CategoryMasterEntity> repository, IRepository<CategoryTypeMaster> categoryTypeRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _repository=repository;
             _categoryTypeRepository = categoryTypeRepository;
+            _unitOfWork=unitOfWork;
             _mapper=mapper;
         }
         public async Task<ServiceResult<CategoryMasterResponseDto>> CreateAsync(CategoryMasterCreateDto dto)
@@ -28,6 +30,7 @@ namespace SpendWise.API.Features.CategoryMaster
             categoryMaster.IsActive = true;
 
             await _repository.AddAsync(categoryMaster);
+            await _unitOfWork.SaveChangesAsync();
 
             var options = new QueryOptions<CategoryMasterEntity>
             {
@@ -63,6 +66,7 @@ namespace SpendWise.API.Features.CategoryMaster
             categoryMaster.IsActive = isActive;
 
             await _repository.UpdateAsync(categoryMaster);
+            await _unitOfWork.SaveChangesAsync();
 
             return new ServiceResult<bool>
             {
@@ -131,6 +135,7 @@ namespace SpendWise.API.Features.CategoryMaster
             _mapper.Map(dto, categoryMaster);
 
             await _repository.UpdateAsync(categoryMaster);
+            await _unitOfWork.SaveChangesAsync();
 
             return new ServiceResult<bool>
             {

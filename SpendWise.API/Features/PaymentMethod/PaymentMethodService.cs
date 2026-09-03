@@ -4,10 +4,15 @@ namespace SpendWise.API.Features.PaymentMethod
     public class PaymentMethodService : IPaymentMethodService
     {
         private readonly IRepository<PaymentMethodEntity> _repository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public PaymentMethodService(IRepository<PaymentMethodEntity> repository,IMapper mapper)
+
+        private const string PaymentMethodNotFoundMsg = "Payment method not found.";
+        private const string PaymentMethodDuplicateMsg = "Payment method with the same name already exists.";
+        public PaymentMethodService(IRepository<PaymentMethodEntity> repository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _repository = repository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
         public async Task<ServiceResult<bool>> ActivateAsync(int id) => await ToggleStatusAsync(id, true);
@@ -21,7 +26,7 @@ namespace SpendWise.API.Features.PaymentMethod
                 return new ServiceResult<PaymentMethodResponseDto>
                 {
                     Status = ServiceResultStatus.Conflict,
-                    Error = "Payment method with the same name already exists."
+                    Error = PaymentMethodDuplicateMsg
                 };
             }
 
@@ -29,6 +34,7 @@ namespace SpendWise.API.Features.PaymentMethod
             paymentMethod.IsActive = true;
 
             await _repository.AddAsync(paymentMethod);
+            await _unitOfWork.SaveChangesAsync();
 
             return new ServiceResult<PaymentMethodResponseDto>
             {
@@ -59,7 +65,7 @@ namespace SpendWise.API.Features.PaymentMethod
                 return new ServiceResult<PaymentMethodResponseDto>
                 {
                     Status = ServiceResultStatus.NotFound,
-                    Error = "Payment method not found."
+                    Error = PaymentMethodNotFoundMsg
                 };
             }
 
@@ -86,7 +92,9 @@ namespace SpendWise.API.Features.PaymentMethod
 
             var paymentMethod = validationResult.Data!;
             _mapper.Map(dto, paymentMethod);
+            
             await _repository.UpdateAsync(paymentMethod);
+            await _unitOfWork.SaveChangesAsync();
 
             return new ServiceResult<bool>
             {
@@ -104,13 +112,14 @@ namespace SpendWise.API.Features.PaymentMethod
                 return new ServiceResult<bool>
                 {
                     Status = ServiceResultStatus.NotFound,
-                    Error = "Payment method not found."
+                    Error = PaymentMethodNotFoundMsg
                 };
             }
 
             paymentMethod.IsActive = isActive;
 
             await _repository.UpdateAsync(paymentMethod);
+            await _unitOfWork.SaveChangesAsync();
 
             return new ServiceResult<bool>
             {
@@ -145,7 +154,7 @@ namespace SpendWise.API.Features.PaymentMethod
                 return new ServiceResult<PaymentMethodEntity>
                 {
                     Status = ServiceResultStatus.NotFound,
-                    Error = "Payment method not found."
+                    Error = PaymentMethodNotFoundMsg
                 };
             }
 
@@ -154,7 +163,7 @@ namespace SpendWise.API.Features.PaymentMethod
                 return new ServiceResult<PaymentMethodEntity>
                 {
                     Status = ServiceResultStatus.Conflict,
-                    Error = "Payment method with the same name already exists."
+                    Error = PaymentMethodDuplicateMsg
                 };
             }
 

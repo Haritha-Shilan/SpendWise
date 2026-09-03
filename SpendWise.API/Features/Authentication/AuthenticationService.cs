@@ -1,8 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-
-namespace SpendWise.API.Features.Authentication
+﻿namespace SpendWise.API.Features.Authentication
 {
     public class AuthenticationService : IAuthenticationService
     {
@@ -10,11 +6,13 @@ namespace SpendWise.API.Features.Authentication
         private readonly IConfiguration _configuration;
         private const string InvalidCredentialMsg = "Invalid email or password";
         private const string DuplicateEmailMsg = "A user with this email already exists.";
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AuthenticationService(UserManager<ApplicationUser> userManager,IConfiguration configuration)
+        public AuthenticationService(UserManager<ApplicationUser> userManager,IConfiguration configuration,IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _configuration = configuration;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<ServiceResult<LoginResponseDto>> LoginAsync(LoginDto dto)
@@ -44,7 +42,7 @@ namespace SpendWise.API.Features.Authentication
         {
             var existingUser = await _userManager.FindByEmailAsync(dto.Email);
 
-            if(existingUser != null)
+            if (existingUser != null)
             {
                 return new ServiceResult<bool>
                 {
@@ -53,6 +51,53 @@ namespace SpendWise.API.Features.Authentication
                 };
             }
 
+            await _unitOfWork.BeginTransactionAsync();
+
+            try
+            {
+                var createUserResult = await CreateUserAsync(dto);
+                if (createUserResult.Status != ServiceResultStatus.Success)
+                {
+                    await _unitOfWork.RollbackTransactionAsync();
+                    return new ServiceResult<bool>
+                    {
+                        Status = createUserResult.Status,
+                        Error = createUserResult.Error
+                    };
+                }
+
+                var user = createUserResult.Data!;
+
+                var addToRoleResult= await AddToRoleAsync(user);
+
+                if (addToRoleResult.Status != ServiceResultStatus.Success)
+                {
+                    await _unitOfWork.RollbackTransactionAsync();
+                    return new ServiceResult<bool>
+                    {
+                        Status = addToRoleResult.Status,
+                        Error = addToRoleResult.Error
+                    };
+                }
+
+                await _unitOfWork.CommitTransactionAsync();
+
+                return new ServiceResult<bool>
+                {
+                    Status = ServiceResultStatus.Success,
+                    Data = true
+                };
+            }
+            catch
+            {
+                await _unitOfWork.RollbackTransactionAsync();
+                throw;
+            }
+           
+        }
+
+        private async Task<ServiceResult<ApplicationUser>> CreateUserAsync(RegisterDto dto)
+        {
             var user = new ApplicationUser
             {
                 UserName = dto.Email,
@@ -60,17 +105,26 @@ namespace SpendWise.API.Features.Authentication
                 FullName = dto.FullName
             };
 
-            var result= await _userManager.CreateAsync(user,dto.Password);
+            var result = await _userManager.CreateAsync(user, dto.Password);
 
-            if(!result.Succeeded)
+            if (!result.Succeeded)
             {
-                return new ServiceResult<bool>
+                return new ServiceResult<ApplicationUser>
                 {
                     Status = ServiceResultStatus.ValidationError,
                     Error = string.Join(", ", result.Errors.Select(x => x.Description))
                 };
             }
 
+            return new ServiceResult<ApplicationUser>
+            {
+                Status = ServiceResultStatus.Success,
+                Data = user
+            };
+        }
+
+        private async Task<ServiceResult<bool>> AddToRoleAsync(ApplicationUser user)
+        {
             var roleResult = await _userManager.AddToRoleAsync(user, "User");
 
             if (!roleResult.Succeeded)
@@ -88,7 +142,7 @@ namespace SpendWise.API.Features.Authentication
                 Data = true
             };
         }
-
+        
         private async Task<ServiceResult<ApplicationUser>> ValidateUserAsync(LoginDto dto)
         {
             var user = await _userManager.FindByEmailAsync(dto.Email);

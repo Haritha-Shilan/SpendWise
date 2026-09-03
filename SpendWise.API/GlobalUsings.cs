@@ -22,3 +22,5 @@ global using SpendWise.API.Features.Authentication;
 global using SpendWise.API.Features.Notification;
 global using System.Text;
 global using Microsoft.AspNetCore.Authorization;
+global using System.IdentityModel.Tokens.Jwt;
+global using System.Security.Claims;

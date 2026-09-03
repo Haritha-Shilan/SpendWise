@@ -6,4 +6,5 @@ global using SpendWise.Domain.Interface;
 global using System.Linq.Expressions;
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.Extensions.Configuration;
-
+global using SpendWise.Infrastructure.Data;
+global using Microsoft.EntityFrameworkCore.Storage;

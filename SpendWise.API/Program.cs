@@ -61,6 +61,7 @@ namespace SpendWise.API
             builder.Services.AddScoped<IPaymentMethodService,PaymentMethodService>();
             builder.Services.AddScoped<INotificationService, NotificationService>();
             builder.Services.AddScoped<IAuthenticationService,AuthenticationService>();
+            builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 
             //JWT
             builder.Services
