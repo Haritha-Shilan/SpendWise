@@ -1,3 +1,5 @@
+using SpendWise.API.Features.Notification;
+
 namespace SpendWise.API
 {
     public class Program
@@ -33,6 +35,7 @@ namespace SpendWise.API
             //Add Feature Services
             builder.Services.AddScoped<ICategoryMasterService, CategoryMasterService>();
             builder.Services.AddScoped<IPaymentMethodService,PaymentMethodService>();
+            builder.Services.AddScoped<INotificationService, NotificationService>();
 
             var app = builder.Build();
 

@@ -1,6 +1,6 @@
-﻿namespace SpendWise.Domain.Entities
+﻿namespace SpendWise.API.Features.Notification.DTOs
 {
-    public class Notification :IEntity
+    public class NotificationResponseDto
     {
         public int Id { get; set; }
 
