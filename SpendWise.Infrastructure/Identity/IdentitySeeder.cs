@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-
-namespace SpendWise.Infrastructure.Identity
+﻿namespace SpendWise.Infrastructure.Identity
 {
     public static class IdentitySeeder
     {
@@ -11,11 +8,10 @@ namespace SpendWise.Infrastructure.Identity
             IConfiguration configuration)
         {
             const string adminRole = "Admin";
+            const string userRole = "User";
 
-            if(!await roleManager.RoleExistsAsync(adminRole))
-            {
-                await roleManager.CreateAsync(new IdentityRole(adminRole));
-            }
+            await EnsureRoleAsync(roleManager, adminRole);
+            await EnsureRoleAsync(roleManager, userRole);
 
             var adminEmail = configuration["Admin:Email"];
             var adminPassword =configuration["Admin:Password"];
@@ -56,6 +52,14 @@ namespace SpendWise.Infrastructure.Identity
             if(!await userManager.IsInRoleAsync(adminUser,adminRole))
             {
                 await userManager.AddToRoleAsync(adminUser, adminRole);
+            }
+        }
+
+        private static async Task EnsureRoleAsync(RoleManager<IdentityRole> roleManager,string roleName)
+        {
+            if(! await roleManager.RoleExistsAsync(roleName))
+            {
+                await roleManager.CreateAsync(new IdentityRole(roleName));
             }
         }
     }

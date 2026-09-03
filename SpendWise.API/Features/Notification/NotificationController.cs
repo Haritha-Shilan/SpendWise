@@ -2,6 +2,7 @@
 {
     [ApiController]
     [Route("api/notification")]
+    [Authorize(Roles ="Admin")]
     public class NotificationController : ControllerBase
     {
         private readonly INotificationService _service;
