@@ -11,5 +11,6 @@ global using Microsoft.AspNetCore.Mvc;
 global using System.ComponentModel.DataAnnotations;
 global using SpendWise.API.Common;
 global using AutoMapper;
-global using SpendWise.API.Features.PaymentMethod.DTO;
+global using SpendWise.API.Features.PaymentMethod.DTOs;
 global using SpendWise.API.Features.PaymentMethod;
+global using SpendWise.API.Features.Notification.DTOs;

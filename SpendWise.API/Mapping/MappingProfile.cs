@@ -1,4 +1,6 @@
-﻿namespace SpendWise.API.Mapping
+﻿using SpendWise.API.Features.Notification.DTOs;
+
+namespace SpendWise.API.Mapping
 {
     public class MappingProfile:Profile
     {
@@ -17,6 +19,10 @@
             CreateMap<PaymentMethodCreateDto, PaymentMethod>();
             CreateMap<PaymentMethodUpdateDto, PaymentMethod>();
             CreateMap<PaymentMethod, PaymentMethodResponseDto>();
+
+            //Notification
+            CreateMap<NotificationCreateDto, Notification>();
+            CreateMap<Notification,NotificationResponseDto>();
         }
     }
 }

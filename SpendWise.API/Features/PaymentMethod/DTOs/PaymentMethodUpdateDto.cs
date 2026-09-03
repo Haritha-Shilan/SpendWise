@@ -1,6 +1,6 @@
-﻿namespace SpendWise.API.Features.PaymentMethod.DTO
+﻿namespace SpendWise.API.Features.PaymentMethod.DTOs
 {
-    public class PaymentMethodCreateDto
+    public class PaymentMethodUpdateDto
     {
         [Required]
         [MaxLength(50)]

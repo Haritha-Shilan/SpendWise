@@ -1,4 +1,4 @@
-﻿namespace SpendWise.API.Features.PaymentMethod.DTO
+﻿namespace SpendWise.API.Features.PaymentMethod.DTOs
 {
     public class PaymentMethodResponseDto
     {
