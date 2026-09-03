@@ -32,6 +32,7 @@ namespace SpendWise.API
 
             //Add Feature Services
             builder.Services.AddScoped<ICategoryMasterService, CategoryMasterService>();
+            builder.Services.AddScoped<IPaymentMethodService,PaymentMethodService>();
 
             var app = builder.Build();
 

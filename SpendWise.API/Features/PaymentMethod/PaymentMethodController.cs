@@ -1,17 +1,18 @@
-﻿namespace SpendWise.API.Features.CategoryMaster
+﻿namespace SpendWise.API.Features.PaymentMethod
 {
     [ApiController]
-    [Route("api/categoryMaster")]
-    public class CategoryMasterController : ControllerBase
+    [Route("api/paymentMethod")]
+    public class PaymentMethodController : ControllerBase
     {
-        private readonly ICategoryMasterService _service;
-        public CategoryMasterController(ICategoryMasterService service)
+        private readonly IPaymentMethodService _service;
+
+        public PaymentMethodController(IPaymentMethodService service)
         {
             _service = service;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryMasterResponseDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<PaymentMethodResponseDto>>> GetAll()
         {
             var result = await _service.GetAllAsync();
 
@@ -22,37 +23,37 @@
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<CategoryMasterResponseDto>> GetById(int id)
+        public async Task<ActionResult<PaymentMethodResponseDto>> GetById(int id)
         {
             var result = await _service.GetByIdAsync(id);
 
             if(result.Status == ServiceResultStatus.NotFound)
                 return NotFound(result.Error);
 
-            if (result.Status == ServiceResultStatus.Success)
+            if( result.Status == ServiceResultStatus.Success )
                 return Ok(result.Data);
 
             return BadRequest(result.Error);
         }
 
         [HttpPost]
-        public async Task<ActionResult<CategoryMasterResponseDto>> Create(CategoryMasterCreateDto dto)
+        public async Task<ActionResult<PaymentMethodResponseDto>> Create(PaymentMethodCreateDto dto)
         {
             var result = await _service.CreateAsync(dto);
 
-            if(result.Status== ServiceResultStatus.Conflict)
+            if (result.Status == ServiceResultStatus.Conflict)
                 return Conflict(result.Error);
 
-            if(result.Status== ServiceResultStatus.Success)
+            if (result.Status == ServiceResultStatus.Success)
             {
                 return CreatedAtAction(nameof(GetById), new { id = result.Data!.Id }, result.Data);
             }
 
-            return BadRequest(result.Error);             
+            return BadRequest(result.Error);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, CategoryMasterUpdateDto dto)
+        public async Task<IActionResult> Update(int id,PaymentMethodUpdateDto dto)
         {
             var result = await _service.UpdateAsync(id, dto);
 
@@ -64,7 +65,7 @@
 
             if (result.Status == ServiceResultStatus.Success)
                 return NoContent();
-            
+
             return BadRequest(result.Error);
         }
 
@@ -76,14 +77,14 @@
 
         private async Task<IActionResult> ToggleState(int id, bool activate)
         {
-            var result = activate
+            var result = activate 
                 ? await _service.ActivateAsync(id)
                 : await _service.DeactivateAsync(id);
 
             if (result.Status == ServiceResultStatus.NotFound)
                 return NotFound(result.Error);
 
-            if(result.Status==ServiceResultStatus.Success)
+            if (result.Status == ServiceResultStatus.Success)
                 return NoContent();
 
             return BadRequest(result.Error);
