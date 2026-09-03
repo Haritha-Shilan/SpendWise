@@ -2,6 +2,7 @@
 {
     [ApiController]
     [Route("api/paymentMethod")]
+    [Authorize(Roles ="Admin")]
     public class PaymentMethodController : ControllerBase
     {
         private readonly IPaymentMethodService _service;

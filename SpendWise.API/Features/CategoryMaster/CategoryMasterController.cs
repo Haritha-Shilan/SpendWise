@@ -2,6 +2,7 @@
 {
     [ApiController]
     [Route("api/categoryMaster")]
+    [Authorize(Roles ="Admin")]
     public class CategoryMasterController : ControllerBase
     {
         private readonly ICategoryMasterService _service;

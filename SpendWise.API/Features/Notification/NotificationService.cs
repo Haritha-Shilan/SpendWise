@@ -4,11 +4,13 @@ namespace SpendWise.API.Features.Notification
     public class NotificationService : INotificationService
     {
         private readonly IRepository<NotificationEntity> _repository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public NotificationService(IRepository<NotificationEntity> repository,IMapper mapper)
+        public NotificationService(IRepository<NotificationEntity> repository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _repository = repository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
@@ -23,6 +25,7 @@ namespace SpendWise.API.Features.Notification
             notification.ReadAt = null;
 
             await _repository.AddAsync(notification);
+            await _unitOfWork.SaveChangesAsync();
 
             return new ServiceResult<NotificationResponseDto>
             {
@@ -87,6 +90,7 @@ namespace SpendWise.API.Features.Notification
                 notification.ReadAt = DateTime.UtcNow;
 
                 await _repository.UpdateAsync(notification);
+                await _unitOfWork.SaveChangesAsync();
             }
 
             return new ServiceResult<bool>
