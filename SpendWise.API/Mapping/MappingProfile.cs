@@ -1,12 +1,10 @@
-﻿using AutoMapper;
-using SpendWise.API.Features.CategoryMaster.DTOs;
-
-namespace SpendWise.API.Mapping
+﻿namespace SpendWise.API.Mapping
 {
     public class MappingProfile:Profile
     {
         public MappingProfile()
         {
+            //CategoryMaster
             CreateMap<CategoryMasterCreateDto, CategoryMaster>();
             CreateMap<CategoryMasterUpdateDto, CategoryMaster>();
             CreateMap<CategoryMaster, CategoryMasterResponseDto>()
@@ -14,6 +12,11 @@ namespace SpendWise.API.Mapping
                 opt => opt.MapFrom(src =>
                             src.CategoryTypeMaster != null ?
                                 src.CategoryTypeMaster.Name : string.Empty));
+
+            //PaymentMethod
+            CreateMap<PaymentMethodCreateDto, PaymentMethod>();
+            CreateMap<PaymentMethodUpdateDto, PaymentMethod>();
+            CreateMap<PaymentMethod, PaymentMethodResponseDto>();
         }
     }
 }

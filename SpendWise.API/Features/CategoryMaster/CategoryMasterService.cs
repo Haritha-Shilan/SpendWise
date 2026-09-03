@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using CategoryMasterEntity = SpendWise.Domain.Entities.CategoryMaster;
+﻿using CategoryMasterEntity = SpendWise.Domain.Entities.CategoryMaster;
 
 namespace SpendWise.API.Features.CategoryMaster
 {
@@ -127,7 +126,7 @@ namespace SpendWise.API.Features.CategoryMaster
                 };
             }
 
-            var categoryMaster = validationResult.Data;
+            var categoryMaster = validationResult.Data!;
 
             _mapper.Map(dto, categoryMaster);
 
@@ -140,14 +139,14 @@ namespace SpendWise.API.Features.CategoryMaster
             };
         }
 
-        #region ValidationFunctions
+        #region ValidationMethods
         private async Task<bool> IsCategoryTypeExistsAsync(int id)
         {
             var categoryType =await _categoryTypeRepository.GetByIdAsync(id);
             return categoryType != null;
         }
 
-        private async Task<bool> IsCategoryExistsAsync(string name,int  categoryTypeId, int? categoryId = null)
+        private async Task<bool> IsCategoryAlreadyExistsAsync(string name,int  categoryTypeId, int? categoryId = null)
         {
             var options = new QueryOptions<CategoryMasterEntity>();
 
@@ -155,7 +154,7 @@ namespace SpendWise.API.Features.CategoryMaster
             options.Filters.Add(x => x.TypeId == categoryTypeId);
             
             if(categoryId.HasValue)
-                options.Filters.Add(x=>x.Id!=categoryId);
+                options.Filters.Add(x=>x.Id!=categoryId.Value);
 
             var categories = await _repository.GetAllAsync(options);
 
@@ -177,7 +176,7 @@ namespace SpendWise.API.Features.CategoryMaster
 
             //Check duplicate
 
-            if (await IsCategoryExistsAsync(dto.Name, dto.TypeId))
+            if (await IsCategoryAlreadyExistsAsync(dto.Name, dto.TypeId))
             {
                 return new ServiceResult<CategoryMasterResponseDto>
                 {
@@ -218,7 +217,7 @@ namespace SpendWise.API.Features.CategoryMaster
             }
 
             //Check duplicate
-            if (await IsCategoryExistsAsync(dto.Name, dto.TypeId,id))
+            if (await IsCategoryAlreadyExistsAsync(dto.Name, dto.TypeId,id))
             {
                 return new ServiceResult<CategoryMasterEntity>
                 {

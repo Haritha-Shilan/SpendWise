@@ -1,6 +1,6 @@
-﻿namespace SpendWise.Domain.Entities
+﻿namespace SpendWise.API.Features.PaymentMethod.DTO
 {
-    public class PaymentMethod:IEntity
+    public class PaymentMethodResponseDto
     {
         public int Id { get; set; }
 
