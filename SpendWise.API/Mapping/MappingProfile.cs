@@ -1,6 +1,4 @@
-﻿using SpendWise.API.Features.Notification.DTOs;
-
-namespace SpendWise.API.Mapping
+﻿namespace SpendWise.API.Mapping
 {
     public class MappingProfile:Profile
     {
@@ -23,6 +21,14 @@ namespace SpendWise.API.Mapping
             //Notification
             CreateMap<NotificationCreateDto, Notification>();
             CreateMap<Notification,NotificationResponseDto>();
+
+            //UserCategory
+            CreateMap<UserCategoryCreateDto, UserCategory>();
+            CreateMap<UserCategoryUpdateDto, UserCategory>();
+            CreateMap<UserCategory, UserCategoryResponseDto>()
+                .ForMember(dest=>dest.TypeName,
+                opt=>opt.MapFrom(src=>
+                            src.CategoryTypeMaster!=null?src.CategoryTypeMaster.Name :string.Empty));
         }
     }
 }

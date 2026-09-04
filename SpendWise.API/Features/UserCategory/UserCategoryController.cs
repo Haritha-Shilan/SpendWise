@@ -1,19 +1,18 @@
-﻿namespace SpendWise.API.Features.PaymentMethod
+﻿namespace SpendWise.API.Features.UserCategory
 {
     [ApiController]
-    [Route("api/paymentMethods")]
-    [Authorize(Roles ="Admin")]
-    public class PaymentMethodController : ControllerBase
+    [Route("userCategories")]
+    [Authorize(Roles ="User")]
+    public class UserCategoryController : ControllerBase
     {
-        private readonly IPaymentMethodService _service;
-
-        public PaymentMethodController(IPaymentMethodService service)
+        private readonly IUserCategoryService _service;
+        public UserCategoryController(IUserCategoryService service)
         {
             _service = service;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PaymentMethodResponseDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<UserCategoryResponseDto>>> GetAll()
         {
             var result = await _service.GetAllAsync();
 
@@ -23,22 +22,33 @@
             return BadRequest(result.Error);
         }
 
+        [HttpGet("active")]
+        public async Task<ActionResult<IEnumerable<UserCategoryResponseDto>>> GetAllActive()
+        {
+            var result = await _service.GetAllActiveAsync();
+
+            if (result.Status == ServiceResultStatus.Success)
+                return Ok(result.Data);
+
+            return BadRequest(result.Error);
+        }
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<PaymentMethodResponseDto>> GetById(int id)
+        public async Task<ActionResult<UserCategoryResponseDto>> GetById(int id)
         {
             var result = await _service.GetByIdAsync(id);
 
-            if(result.Status == ServiceResultStatus.NotFound)
+            if (result.Status == ServiceResultStatus.NotFound)
                 return NotFound(result.Error);
 
-            if( result.Status == ServiceResultStatus.Success )
+            if (result.Status == ServiceResultStatus.Success)
                 return Ok(result.Data);
 
             return BadRequest(result.Error);
         }
 
         [HttpPost]
-        public async Task<ActionResult<PaymentMethodResponseDto>> Create(PaymentMethodCreateDto dto)
+        public async Task<ActionResult<UserCategoryResponseDto>> Create(UserCategoryCreateDto dto)
         {
             var result = await _service.CreateAsync(dto);
 
@@ -54,7 +64,7 @@
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id,PaymentMethodUpdateDto dto)
+        public async Task<IActionResult> Update(int id, UserCategoryUpdateDto dto)
         {
             var result = await _service.UpdateAsync(id, dto);
 
@@ -78,7 +88,7 @@
 
         private async Task<IActionResult> ToggleState(int id, bool activate)
         {
-            var result = activate 
+            var result = activate
                 ? await _service.ActivateAsync(id)
                 : await _service.DeactivateAsync(id);
 

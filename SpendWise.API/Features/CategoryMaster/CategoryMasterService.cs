@@ -8,6 +8,11 @@ namespace SpendWise.API.Features.CategoryMaster
         private readonly IRepository<CategoryTypeMaster> _categoryTypeRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+
+        private const string CategoryMasterNotFoundMsg = "Category not found.";
+        private const string InvalidCategoryTypeMsg = "Invalid category type.";
+        private const string ConflictMsg = "A category with the same name already exists for this category type.";
+
         public CategoryMasterService(IRepository<CategoryMasterEntity> repository, IRepository<CategoryTypeMaster> categoryTypeRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _repository=repository;
@@ -59,7 +64,7 @@ namespace SpendWise.API.Features.CategoryMaster
                 return new ServiceResult<bool>
                 {
                     Status = ServiceResultStatus.NotFound,
-                    Error="Category not found."
+                    Error=CategoryMasterNotFoundMsg
                 };
             }
 
@@ -104,7 +109,7 @@ namespace SpendWise.API.Features.CategoryMaster
                 return new ServiceResult<CategoryMasterResponseDto>
                 {
                     Status = ServiceResultStatus.NotFound,
-                    Error = "Category not found."
+                    Error = CategoryMasterNotFoundMsg
                 };
             }
 
@@ -175,7 +180,7 @@ namespace SpendWise.API.Features.CategoryMaster
                 return new ServiceResult<CategoryMasterResponseDto>
                 {
                     Status = ServiceResultStatus.ValidationError,
-                    Error = "Invalid category type."
+                    Error = InvalidCategoryTypeMsg
                 };
             }
 
@@ -186,7 +191,7 @@ namespace SpendWise.API.Features.CategoryMaster
                 return new ServiceResult<CategoryMasterResponseDto>
                 {
                     Status = ServiceResultStatus.Conflict,
-                    Error = "A category with the same name already exists for this category type."
+                    Error = ConflictMsg
                 };
             }
 
@@ -207,7 +212,7 @@ namespace SpendWise.API.Features.CategoryMaster
                 return new ServiceResult<CategoryMasterEntity>
                 {
                     Status = ServiceResultStatus.NotFound,
-                    Error = "Category not found."
+                    Error = CategoryMasterNotFoundMsg
                 };
             }
 
@@ -217,7 +222,7 @@ namespace SpendWise.API.Features.CategoryMaster
                 return new ServiceResult<CategoryMasterEntity>
                 {
                     Status = ServiceResultStatus.ValidationError,
-                    Error = "Invalid category type."
+                    Error = InvalidCategoryTypeMsg
                 };
             }
 
@@ -227,7 +232,7 @@ namespace SpendWise.API.Features.CategoryMaster
                 return new ServiceResult<CategoryMasterEntity>
                 {
                     Status = ServiceResultStatus.Conflict,
-                    Error = "A category with the same name already exists for this category type."
+                    Error = ConflictMsg
                 };
             }
 
