@@ -1,7 +1,7 @@
 ﻿namespace SpendWise.API.Features.CategoryMaster
 {
     [ApiController]
-    [Route("api/categoryMaster")]
+    [Route("api/categoryMasters")]
     [Authorize(Roles ="Admin")]
     public class CategoryMasterController : ControllerBase
     {

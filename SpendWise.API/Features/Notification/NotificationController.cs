@@ -1,7 +1,7 @@
 ﻿namespace SpendWise.API.Features.Notification
 {
     [ApiController]
-    [Route("api/notification")]
+    [Route("api/notifications")]
     [Authorize(Roles ="Admin")]
     public class NotificationController : ControllerBase
     {
