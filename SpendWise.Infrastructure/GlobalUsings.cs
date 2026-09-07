@@ -8,3 +8,5 @@ global using Microsoft.AspNetCore.Identity;
 global using Microsoft.Extensions.Configuration;
 global using SpendWise.Infrastructure.Data;
 global using Microsoft.EntityFrameworkCore.Storage;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.AspNetCore.Hosting;

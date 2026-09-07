@@ -9,9 +9,9 @@
             CreateMap<CategoryMasterUpdateDto, CategoryMaster>();
             CreateMap<CategoryMaster, CategoryMasterResponseDto>()
                 .ForMember(dest => dest.TypeName,
-                opt => opt.MapFrom(src =>
-                            src.CategoryTypeMaster != null ?
-                                src.CategoryTypeMaster.Name : string.Empty));
+                opt => opt.MapFrom(src => src.CategoryTypeMaster != null 
+                                        ? src.CategoryTypeMaster.Name 
+                                        : string.Empty));
 
             //PaymentMethod
             CreateMap<PaymentMethodCreateDto, PaymentMethod>();
@@ -27,8 +27,50 @@
             CreateMap<UserCategoryUpdateDto, UserCategory>();
             CreateMap<UserCategory, UserCategoryResponseDto>()
                 .ForMember(dest=>dest.TypeName,
-                opt=>opt.MapFrom(src=>
-                            src.CategoryTypeMaster!=null?src.CategoryTypeMaster.Name :string.Empty));
+                opt=>opt.MapFrom(src=>src.CategoryTypeMaster!=null
+                                     ?src.CategoryTypeMaster.Name 
+                                     :string.Empty));
+
+
+            //Transaction
+            CreateMap<TransactionCreateDto, Transaction>();
+            CreateMap<TransactionUpdateDto,Transaction>();
+            CreateMap<Transaction, TransactionResponseDto>()
+                .ForMember(
+                    dest => dest.UserCategoryName,
+                    opt => opt.MapFrom(src => src.UserCategory != null
+                                            ? src.UserCategory.Name
+                                            : string.Empty)
+                )
+                .ForMember(
+                    dest => dest.PaymentMethodName,
+                    opt => opt.MapFrom(src => src.PaymentMethod != null
+                                            ? src.PaymentMethod.Name
+                                            : string.Empty)
+                )
+                .ForMember(
+                    dest => dest.CategoryTypeId,
+                    opt => opt.MapFrom(src => src.UserCategory != null
+                                            ? src.UserCategory.TypeId
+                                            : -1)
+                )
+                .ForMember(
+                    dest => dest.CategoryTypeName,
+                    opt => opt.MapFrom(src => src.UserCategory != null && src.UserCategory!.CategoryTypeMaster != null
+                                            ? src.UserCategory.CategoryTypeMaster.Name
+                                            : string.Empty)
+                )
+                .ForMember(
+                    dest => dest.HasAttachment,
+                    opt => opt.MapFrom(src =>
+                        src.TransactionAttachment != null)
+                )
+                .ForMember(
+                    dest => dest.AttachmentFileName,
+                    opt => opt.MapFrom(src =>
+                        src.TransactionAttachment != null
+                            ? src.TransactionAttachment.FileName
+                            : null));             
         }
     }
 }

@@ -1,5 +1,3 @@
-using SpendWise.API.Features.UserCategory;
-
 namespace SpendWise.API
 {
     public class Program
@@ -65,6 +63,8 @@ namespace SpendWise.API
             builder.Services.AddScoped<IAuthenticationService,AuthenticationService>();
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
             builder.Services.AddScoped<IUserCategoryService, UserCategoryService>();
+            builder.Services.AddScoped<IFileStorageService, FileStorageService>();
+            builder.Services.AddScoped<ITransactionService, TransactionService>();
 
 
             //JWT
