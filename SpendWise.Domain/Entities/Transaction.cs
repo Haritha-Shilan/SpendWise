@@ -1,6 +1,4 @@
-﻿using SpendWise.Domain.Interface;
-
-namespace SpendWise.Domain.Entities
+﻿namespace SpendWise.Domain.Entities
 {
     public class Transaction : IEntity
     {
@@ -23,5 +21,7 @@ namespace SpendWise.Domain.Entities
         public DateTime Date { get; set; }
 
         public string Description { get; set; } = string.Empty;
+
+        public TransactionAttachment? TransactionAttachment { get; set; }
     }
 }

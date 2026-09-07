@@ -25,3 +25,8 @@ global using Microsoft.AspNetCore.Authorization;
 global using System.IdentityModel.Tokens.Jwt;
 global using System.Security.Claims;
 global using SpendWise.API.Features.UserCategory.DTOs;
+global using SpendWise.API.Features.Transaction.DTOs;
+global using Microsoft.AspNetCore.Http;
+global using SpendWise.API.Features.UserCategory;
+global using SpendWise.Infrastructure.FileStorage;
+global using SpendWise.API.Features.Transaction;

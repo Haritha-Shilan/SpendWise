@@ -32,7 +32,7 @@
                 .IsRequired();
 
             builder.HasOne(x=>x.Transaction)
-                .WithOne()
+                .WithOne(x => x.TransactionAttachment)
                 .HasForeignKey<TransactionAttachment>(x => x.TransactionId)
                 .OnDelete(DeleteBehavior.Restrict);
 

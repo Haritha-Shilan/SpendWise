@@ -22,4 +22,8 @@
     <ProjectReference Include="..\SpendWise.Infrastructure\SpendWise.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\transactions\" />
+  </ItemGroup>
+
 </Project>
