@@ -1,4 +1,5 @@
 using SpendWise.API.Common.Reporting;
+
 using SpendWise.API.Features.UserReport;
 
 namespace SpendWise.API
@@ -75,6 +76,7 @@ namespace SpendWise.API
             builder.Services.AddScoped< IExpenseByCategoryService,ExpenseByCategoryService>();
             builder.Services.AddScoped<IIncomeSummaryService,IncomeSummaryService>();
             builder.Services.AddScoped<IUserReportService,UserReportService>();
+            builder.Services.AddScoped<IAdminDashboardService, AdminDashboardService>();
 
 
             //JWT
