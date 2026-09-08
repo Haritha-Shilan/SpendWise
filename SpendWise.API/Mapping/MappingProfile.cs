@@ -87,6 +87,14 @@
                         src.UserCategory.TypeId == (int)CategoryType.Income
                             ? "Income"
                             : "Expense"));
+
+            //AdminDashboard
+            CreateMap<ApplicationUser, RecentRegistrationDto>()
+                .ForMember(
+                    dest => dest.IsActive,
+                    opt => opt.MapFrom(src => true));
+
+            CreateMap<Notification, NotificationSummaryDto>();
         }
     }
 }

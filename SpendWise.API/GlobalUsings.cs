@@ -36,3 +36,4 @@ global using SpendWise.API.Features.UserDashboard;
 global using SpendWise.API.Features.UserReport.DTOs;
 global using SpendWise.API.Common.Reporting;
 global using SpendWise.API.Features.UserReport;
+global using SpendWise.API.Features.AdminDashboard;
