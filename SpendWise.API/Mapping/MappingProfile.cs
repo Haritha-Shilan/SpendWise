@@ -70,7 +70,23 @@
                     opt => opt.MapFrom(src =>
                         src.TransactionAttachment != null
                             ? src.TransactionAttachment.FileName
-                            : null));             
+                            : null));
+
+            //UserDashboard
+            CreateMap<Transaction, RecentTransactionDto>()
+                .ForMember(
+                    dest => dest.CategoryName,
+                    opt => opt.MapFrom(src =>
+                        src.UserCategory != null
+                            ? src.UserCategory.Name
+                            : string.Empty))
+                .ForMember(
+                    dest => dest.Type,
+                    opt => opt.MapFrom(src =>
+                        src.UserCategory != null &&
+                        src.UserCategory.TypeId == (int)CategoryType.Income
+                            ? "Income"
+                            : "Expense"));
         }
     }
 }

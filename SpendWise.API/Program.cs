@@ -1,3 +1,6 @@
+using SpendWise.API.Common.Reporting;
+using SpendWise.API.Features.UserReport;
+
 namespace SpendWise.API
 {
     public class Program
@@ -65,6 +68,13 @@ namespace SpendWise.API
             builder.Services.AddScoped<IUserCategoryService, UserCategoryService>();
             builder.Services.AddScoped<IFileStorageService, FileStorageService>();
             builder.Services.AddScoped<ITransactionService, TransactionService>();
+            builder.Services.AddScoped<IDateRangeService, DateRangeService>();
+            builder.Services.AddScoped<IUserDashboardService, UserDashboardService>();
+            builder.Services.AddScoped<ITransactionQueryService,TransactionQueryService>();
+            builder.Services.AddScoped<IMonthlySummaryService, MonthlySummaryService>();
+            builder.Services.AddScoped< IExpenseByCategoryService,ExpenseByCategoryService>();
+            builder.Services.AddScoped<IIncomeSummaryService,IncomeSummaryService>();
+            builder.Services.AddScoped<IUserReportService,UserReportService>();
 
 
             //JWT
