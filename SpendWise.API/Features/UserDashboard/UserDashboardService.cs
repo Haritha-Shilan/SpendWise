@@ -1,5 +1,4 @@
-﻿using TransactionEntity = SpendWise.Domain.Entities.Transaction;
-namespace SpendWise.API.Features.UserDashboard
+﻿namespace SpendWise.API.Features.UserDashboard
 {
     public class UserDashboardService : IUserDashboardService
     {

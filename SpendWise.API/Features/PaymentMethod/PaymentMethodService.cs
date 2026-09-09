@@ -1,5 +1,4 @@
-﻿using PaymentMethodEntity = SpendWise.Domain.Entities.PaymentMethod;
-namespace SpendWise.API.Features.PaymentMethod
+﻿namespace SpendWise.API.Features.PaymentMethod
 {
     public class PaymentMethodService : IPaymentMethodService
     {

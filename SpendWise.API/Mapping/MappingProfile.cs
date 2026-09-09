@@ -13,6 +13,12 @@
                                         ? src.CategoryTypeMaster.Name 
                                         : string.Empty));
 
+            CreateMap<CategoryMaster, UserCategory>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.UserId, opt => opt.Ignore())
+                .ForMember(dest => dest.ApplicationUser, opt => opt.Ignore())
+                .ForMember(dest => dest.CategoryTypeMaster, opt => opt.Ignore());
+
             //PaymentMethod
             CreateMap<PaymentMethodCreateDto, PaymentMethod>();
             CreateMap<PaymentMethodUpdateDto, PaymentMethod>();

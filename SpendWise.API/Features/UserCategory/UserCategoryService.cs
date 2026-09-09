@@ -1,5 +1,4 @@
-﻿using UserCategoryEntity = SpendWise.Domain.Entities.UserCategory;
-namespace SpendWise.API.Features.UserCategory
+﻿namespace SpendWise.API.Features.UserCategory
 {
     public class UserCategoryService : IUserCategoryService
     {
