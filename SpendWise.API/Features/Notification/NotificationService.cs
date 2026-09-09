@@ -1,5 +1,4 @@
-﻿using NotificationEntity = SpendWise.Domain.Entities.Notification;
-namespace SpendWise.API.Features.Notification
+﻿namespace SpendWise.API.Features.Notification
 {
     public class NotificationService : INotificationService
     {

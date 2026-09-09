@@ -1,7 +1,3 @@
-using SpendWise.API.Common.Reporting;
-
-using SpendWise.API.Features.UserReport;
-
 namespace SpendWise.API
 {
     public class Program
@@ -47,6 +43,12 @@ namespace SpendWise.API
             builder.Services.AddDbContext<SpendWiseDbContext>(options=>
             options.UseSqlServer(builder.Configuration.GetConnectionString("SpendWiseConnection")));
 
+            //EmailConfiguration
+            builder.Services.Configure<EmailSettings>(
+                builder.Configuration.GetSection("EmailSettings"));
+
+            builder.Services.AddScoped<IEmailService, EmailService>();
+
             //IdentityContext
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<SpendWiseDbContext>()
@@ -77,6 +79,7 @@ namespace SpendWise.API
             builder.Services.AddScoped<IIncomeSummaryService,IncomeSummaryService>();
             builder.Services.AddScoped<IUserReportService,UserReportService>();
             builder.Services.AddScoped<IAdminDashboardService, AdminDashboardService>();
+            builder.Services.AddScoped<IEmailService, EmailService>();
 
 
             //JWT

@@ -1,5 +1,4 @@
-﻿using TransactionEntity = SpendWise.Domain.Entities.Transaction;
-namespace SpendWise.API.Common.Reporting
+﻿namespace SpendWise.API.Common.Reporting
 {
     public interface IExpenseByCategoryService
     {

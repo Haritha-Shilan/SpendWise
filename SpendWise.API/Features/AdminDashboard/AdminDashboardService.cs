@@ -1,7 +1,4 @@
-﻿using CategoryMasterEntity = SpendWise.Domain.Entities.CategoryMaster;
-using NotificationEntity = SpendWise.Domain.Entities.Notification;
-
-namespace SpendWise.API.Features.AdminDashboard;
+﻿namespace SpendWise.API.Features.AdminDashboard;
 public class AdminDashboardService : IAdminDashboardService
 {
     private readonly UserManager<ApplicationUser> _userManager;

@@ -1,6 +1,4 @@
-﻿using TransactionEntity = SpendWise.Domain.Entities.Transaction;
-
-namespace SpendWise.API.Features.Transaction
+﻿namespace SpendWise.API.Features.Transaction
 {
     public class TransactionQueryService : ITransactionQueryService
     {

@@ -1,6 +1,4 @@
-﻿using CategoryMasterEntity = SpendWise.Domain.Entities.CategoryMaster;
-
-namespace SpendWise.API.Features.CategoryMaster
+﻿namespace SpendWise.API.Features.CategoryMaster
 {
     public class CategoryMasterService : ICategoryMasterService
     {

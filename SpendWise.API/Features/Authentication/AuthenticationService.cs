@@ -1,18 +1,37 @@
-﻿namespace SpendWise.API.Features.Authentication
+﻿
+namespace SpendWise.API.Features.Authentication
 {
     public class AuthenticationService : IAuthenticationService
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
+        private readonly IMapper _mapper;
+        private readonly IRepository<CategoryMasterEntity> _categoryMasterRepository;
+        private readonly IRepository<UserCategoryEntity> _userCategoryRepository;
+        private readonly IRepository<NotificationEntity> _notificationRepository;
+        private readonly IEmailService _emailService;
         private const string InvalidCredentialMsg = "Invalid email or password";
         private const string DuplicateEmailMsg = "A user with this email already exists.";
         private readonly IUnitOfWork _unitOfWork;
 
-        public AuthenticationService(UserManager<ApplicationUser> userManager,IConfiguration configuration,IUnitOfWork unitOfWork)
+        public AuthenticationService(
+            UserManager<ApplicationUser> userManager,
+            IConfiguration configuration,
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            IEmailService emailService,
+            IRepository<CategoryMasterEntity> categoryMasterRepository,
+            IRepository<UserCategoryEntity> userCategoryRepository,
+            IRepository<NotificationEntity> notificationRepository)
         {
             _userManager = userManager;
             _configuration = configuration;
             _unitOfWork = unitOfWork;
+            _categoryMasterRepository = categoryMasterRepository;
+            _userCategoryRepository = userCategoryRepository;
+            _notificationRepository = notificationRepository;
+            _mapper=mapper;
+            _emailService = emailService;
         }
 
         public async Task<ServiceResult<LoginResponseDto>> LoginAsync(LoginDto dto)
@@ -80,7 +99,15 @@
                     };
                 }
 
+                await InitializeUserCategoriesAsync(user.Id);
+
+                await CreateRegistrationNotificationAsync(user);
+
+                await _unitOfWork.SaveChangesAsync();
+
                 await _unitOfWork.CommitTransactionAsync();
+
+                await _emailService.SendWelcomeEmailAsync(user.Email!,user.FullName);
 
                 return new ServiceResult<bool>
                 {
@@ -200,6 +227,36 @@
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private async Task InitializeUserCategoriesAsync(string userId)
+        {
+            var options = new QueryOptions<CategoryMasterEntity>();
+            options.Filters.Add(x => x.IsActive);
+
+            var categories = await _categoryMasterRepository.GetAllAsync(options);
+
+            foreach (var category in categories)
+            {
+                var userCategory = _mapper.Map<UserCategoryEntity>(category);
+
+                userCategory.UserId = userId;
+
+                await _userCategoryRepository.AddAsync(userCategory);
+            }
+        }
+
+        private async Task CreateRegistrationNotificationAsync(ApplicationUser user)
+        {
+            var notification = new NotificationEntity
+            {
+                Message = $"New user registered: {user.FullName} ({user.Email})",
+                IsRead = false,
+                CreatedAt = DateTime.UtcNow,
+                ReadAt = null
+            };
+
+            await _notificationRepository.AddAsync(notification);
         }
     }
 }

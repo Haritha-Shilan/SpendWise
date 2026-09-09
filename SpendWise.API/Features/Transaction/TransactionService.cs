@@ -1,8 +1,4 @@
-﻿using PaymentMethodEntity = SpendWise.Domain.Entities.PaymentMethod;
-using TransactionAttachmentEntity = SpendWise.Domain.Entities.TransactionAttachment;
-using TransactionEntity = SpendWise.Domain.Entities.Transaction;
-using UserCategoryEntity = SpendWise.Domain.Entities.UserCategory;
-namespace SpendWise.API.Features.Transaction
+﻿namespace SpendWise.API.Features.Transaction
 {
     public class TransactionService : ITransactionService
     {
