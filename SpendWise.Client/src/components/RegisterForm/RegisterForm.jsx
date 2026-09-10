@@ -4,7 +4,7 @@ import { useRegisterForm } from "../../hooks/useRegisterForm"
 
 function RegisterForm() {
 
-    const { formData, errors, serverErrors, isSubmitting, handleChange, handleSubmit } = useRegisterForm();
+    const { formData, errors, serverError, isSubmitting, handleChange, handleSubmit } = useRegisterForm();
 
     return (
         <div className="auth-card">
@@ -16,9 +16,9 @@ function RegisterForm() {
 
             <form onSubmit={handleSubmit}>
                 {/* Server Error */}
-                {serverErrors &&
+                {serverError &&
                     <div className="auth-error">
-                        {serverErrors}
+                        {serverError}
                     </div>}
 
 

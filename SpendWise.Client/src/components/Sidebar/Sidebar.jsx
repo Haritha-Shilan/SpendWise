@@ -1,8 +1,18 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
 import './Sidebar.css'
+import { logout } from "../../store/authSlice";
+import { useDispatch } from "react-redux";
 
 function Sidebar({ menuItems }) {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("spendWiseToken");
+        dispatch(logout());
+        navigate("/login");
+    }
     return (
         <aside className="sidebar">
             <div className="sidebar-logo">
@@ -37,7 +47,7 @@ function Sidebar({ menuItems }) {
             </nav>
 
             <div className="sidebar-footer">
-                <button type="button" className="sidebar-logout">
+                <button type="button" className="sidebar-logout" onClick={handleLogout}>
                     <FiLogOut className="sidebar-icon" />
                     <span>Logout</span>
                 </button>
