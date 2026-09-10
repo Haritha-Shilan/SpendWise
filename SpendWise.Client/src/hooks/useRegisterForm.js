@@ -16,7 +16,7 @@ export const useRegisterForm = () => {
 
     const [formData, setFormData] = useState(initialState);
     const [errors, setErrors] = useState({});
-    const [serverErrors, setServerErrors] = useState("");
+    const [serverError, setServerError] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleChange = (e) => {
@@ -36,7 +36,7 @@ export const useRegisterForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setServerErrors("");
+        setServerError("");
 
         if (!validateForm())
             return;
@@ -50,13 +50,13 @@ export const useRegisterForm = () => {
         }
         catch (error) {
             if (error.response?.status === 409) {
-                setServerErrors("An account with this email already exists.");
+                setServerError("An account with this email already exists.");
             } else if (error.response?.status === 400) {
-                setServerErrors(
+                setServerError(
                     error.response.data?.error || "Please check the entered details."
                 );
             } else {
-                setServerErrors("Registration failed. Please try again.");
+                setServerError("Registration failed. Please try again.");
             }
         }
         finally {
@@ -64,5 +64,5 @@ export const useRegisterForm = () => {
         }
     }
 
-    return { formData, errors, serverErrors, isSubmitting, handleChange, handleSubmit };
+    return { formData, errors, serverError, isSubmitting, handleChange, handleSubmit };
 }

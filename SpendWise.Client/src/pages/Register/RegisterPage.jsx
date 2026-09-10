@@ -1,5 +1,5 @@
 import RegisterForm from "../../components/RegisterForm/RegisterForm"
-
+import './RegisterPage.css'
 function RegisterPage() {
   return (
     <div className="auth-page">
