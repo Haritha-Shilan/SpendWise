@@ -1,3 +1,5 @@
+using SpendWise.API.Middleware;
+
 namespace SpendWise.API
 {
     public class Program
@@ -107,7 +109,20 @@ namespace SpendWise.API
                     };
                 });
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("ReactClient", policy =>
+                {
+                    policy
+                        .WithOrigins("http://localhost:5173")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
             var app = builder.Build();
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             //Invoke runtime seeder
             using (var scope= app.Services.CreateScope())
@@ -119,14 +134,16 @@ namespace SpendWise.API
 
             }
 
-                // Configure the HTTP request pipeline.
-                if (app.Environment.IsDevelopment())
-                {
-                    app.UseSwagger();
-                    app.UseSwaggerUI();
-                }
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+
 
             app.UseHttpsRedirection();
+            app.UseCors("ReactClient");
 
             app.UseAuthentication();
             app.UseAuthorization();
