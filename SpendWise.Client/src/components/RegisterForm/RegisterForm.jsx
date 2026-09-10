@@ -1,32 +1,10 @@
-import { useState } from "react"
 import { Link } from "react-router-dom"
-import { validateRegisterForm } from "../../validations/authValidation";
 import './RegisterForm.css'
+import { useRegisterForm } from "../../hooks/useRegisterForm"
 
 function RegisterForm() {
-    const initialState = {
-        fullName: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
-    }
-    const [formData, setFormData] = useState(initialState);
-    const [erros, setErrors] = useState({});
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        if (validateForm()) {
-            console.log("created");
-        }
-    }
-
-    const validateForm = () => {
-        const validationErrors = validateRegisterForm(formData);
-        setErrors(validationErrors);
-
-        return Object.keys(validationErrors).length === 0;
-    }
+    const { formData, errors, serverErrors, isSubmitting, handleChange, handleSubmit } = useRegisterForm();
 
     return (
         <div className="auth-card">
@@ -37,6 +15,13 @@ function RegisterForm() {
             </p>
 
             <form onSubmit={handleSubmit}>
+                {/* Server Error */}
+                {serverErrors &&
+                    <div className="auth-error">
+                        {serverErrors}
+                    </div>}
+
+
                 {/* FullName */}
                 <div className="auth-form-group">
                     <label htmlFor="fullName">FullName</label>
@@ -45,9 +30,8 @@ function RegisterForm() {
                         placeholder="Enter your full name"
                         required
                         value={formData.fullName}
-                        onChange={(e) => {
-                            setFormData({ ...formData, fullName: e.target.value })
-                        }}
+                        onChange={handleChange}
+                        name="fullName"
                     />
                 </div>
 
@@ -56,13 +40,12 @@ function RegisterForm() {
                     <label htmlFor="email">Email</label>
                     <input
                         id="email"
+                        name="email"
                         type="email"
                         placeholder="Enter your mail address"
                         required
                         value={formData.email}
-                        onChange={(e) => {
-                            setFormData({ ...formData, email: e.target.value })
-                        }}
+                        onChange={handleChange}
                     />
                 </div>
 
@@ -71,13 +54,12 @@ function RegisterForm() {
                     <label htmlFor="password">Password</label>
                     <input
                         id="password"
+                        name="password"
                         type="password"
                         placeholder="Create a password"
                         required
                         value={formData.password}
-                        onChange={(e) => {
-                            setFormData({ ...formData, password: e.target.value })
-                        }} />
+                        onChange={handleChange} />
                 </div>
 
                 {/* Confirm Password */}
@@ -85,25 +67,31 @@ function RegisterForm() {
                     <label htmlFor="confirmPassword">Confirm Password</label>
                     <input
                         id="confirmPassword"
+                        name="confirmPassword"
                         type="password"
                         placeholder="Re-enter password"
                         required
                         value={formData.confirmPassword}
-                        onChange={(e) => {
-                            setFormData({ ...formData, confirmPassword: e.target.value })
-                        }}
+                        onChange={handleChange}
                     />
 
-                    {erros.confirmPassword &&
-                        (<div className="auth-error"> {erros.confirmPassword} </div>)}
+                    {errors.confirmPassword &&
+                        (<div className="auth-error"> {errors.confirmPassword} </div>)}
                 </div>
 
                 {/* Submit Button */}
                 <button
                     type="submit"
                     className="auth-submit-button"
+                    disabled={isSubmitting}
                 >
-                    Create Account
+                    {isSubmitting ?
+                        (
+                            <>
+                                <span className="auth-spinner"></span>
+                                "Creating Account...."
+                            </>
+                        ) : "Create Account"}
                 </button>
             </form>
 

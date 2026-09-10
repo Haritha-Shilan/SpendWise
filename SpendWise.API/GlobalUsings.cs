@@ -45,3 +45,4 @@ global using DateRangeModal = SpendWise.API.Common.DateRange.DateRange;
 global using PaymentMethodEntity = SpendWise.Domain.Entities.PaymentMethod;
 global using TransactionAttachmentEntity = SpendWise.Domain.Entities.TransactionAttachment;
 global using SpendWise.API.Services;
+global using Microsoft.AspNetCore.Diagnostics;
