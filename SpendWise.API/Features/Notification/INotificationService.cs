@@ -12,5 +12,7 @@ namespace SpendWise.API.Features.Notification
 
         public Task<ServiceResult<bool>> MarkAsReadAsync(int id);
 
+        public Task<ServiceResult<bool>> MarkAllAsReadAsync();
+
     }
 }

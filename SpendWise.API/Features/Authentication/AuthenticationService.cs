@@ -250,7 +250,7 @@ namespace SpendWise.API.Features.Authentication
         {
             var notification = new NotificationEntity
             {
-                Message = $"New user registered: {user.FullName} ({user.Email})",
+                Message = $"New user registered - {user.FullName} ({user.Email})",
                 IsRead = false,
                 CreatedAt = DateTime.UtcNow,
                 ReadAt = null

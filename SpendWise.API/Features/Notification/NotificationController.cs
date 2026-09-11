@@ -63,5 +63,16 @@
 
             return BadRequest(result.Error);
         }
+
+        [HttpPatch("read-all")]
+        public async Task<IActionResult> MarkAllAsRead()
+        {
+            var result = await _service.MarkAllAsReadAsync();
+
+            if (result.Status == ServiceResultStatus.Success)
+                return NoContent();
+
+            return BadRequest(result.Error);
+        }
     }
 }

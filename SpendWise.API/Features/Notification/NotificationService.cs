@@ -1,4 +1,6 @@
-﻿namespace SpendWise.API.Features.Notification
+﻿using static System.Net.WebRequestMethods;
+
+namespace SpendWise.API.Features.Notification
 {
     public class NotificationService : INotificationService
     {
@@ -38,8 +40,10 @@
             var options = new QueryOptions<NotificationEntity>
             {
                 OrderBy = x => x.CreatedAt,
-                OrderDescending = true
+                OrderDescending = true,
             };
+
+            options.Filters.Add(x => !x.IsRead);
 
             var notifications = await _repository.GetAllAsync(options);
 
@@ -98,5 +102,30 @@
                 Data=true
             };
         }
+
+        public async Task<ServiceResult<bool>> MarkAllAsReadAsync()
+        {
+            var options = new QueryOptions<NotificationEntity>();
+            options.Filters.Add(x => !x.IsRead);
+
+            var notifications = await _repository.GetAllAsync(options);
+
+            foreach (var notification in notifications)
+            {
+                notification.IsRead = true;
+                notification.ReadAt = DateTime.UtcNow;
+
+                await _repository.UpdateAsync(notification);
+            }
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return new ServiceResult<bool>
+            {
+                Status = ServiceResultStatus.Success,
+                Data = true
+            };
+        }
+
     }
 }
