@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom"
 import { pageTitles } from "../../config/navigation"
-import  './Header.css'
+import './Header.css'
 
 function Header() {
 
@@ -11,7 +11,7 @@ function Header() {
     return (
         <header className="header">
             <div className="header-title">
-                <p className="header-breadcrumb">SpendWise / {isAdmin ? "Admin" : "User"}</p>
+                <p className="header-breadcrumb">SpendWise / {isAdmin ? "Admin" : "Personal Finance"}</p>
                 <h1>{title}</h1>
             </div>
 

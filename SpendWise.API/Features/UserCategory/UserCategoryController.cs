@@ -1,7 +1,7 @@
 ﻿namespace SpendWise.API.Features.UserCategory
 {
     [ApiController]
-    [Route("userCategories")]
+    [Route("api/userCategories")]
     [Authorize(Roles ="User")]
     public class UserCategoryController : ControllerBase
     {
