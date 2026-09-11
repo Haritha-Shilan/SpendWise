@@ -3,7 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import LoginPage from './pages/Login/LoginPage'
 import RegisterPage from './pages/Register/RegisterPage'
-import AdminDashboardPage from './pages/AdminDashboardPage'
+import AdminDashboardPage from './pages/AdminDashboard/AdminDashboardPage'
 import AdminCategoryMasterPage from './pages/AdminCategoryMaster/AdminCategoryMasterPage'
 import AdminNotificationsPage from './pages/AdminNotifications/AdminNotificationsPage'
 import UserDashboardPage from './pages/UserDashboardPage'

@@ -99,8 +99,6 @@
                 .ForMember(
                     dest => dest.IsActive,
                     opt => opt.MapFrom(src => true));
-
-            CreateMap<Notification, NotificationSummaryDto>();
         }
     }
 }

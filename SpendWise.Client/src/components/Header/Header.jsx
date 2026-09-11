@@ -1,13 +1,16 @@
 import { useLocation } from "react-router-dom"
 import { pageTitles } from "../../config/navigation"
 import './Header.css'
+import { useSelector } from "react-redux";
+import { getInitials } from "../../utils/getInitials";
 
 function Header() {
 
     const location = useLocation();
     const title = pageTitles[location.pathname] || "SpendWise";
     const isAdmin = location.pathname.startsWith("/admin");
-
+    const user = useSelector((state) => state.auth.user);
+    console.log(user);
     return (
         <header className="header">
             <div className="header-title">
@@ -25,7 +28,9 @@ function Header() {
                     </span>
                 </div>
 
-                <div className="header-avatar">{isAdmin ? "A" : "U"}</div>
+                <div className="header-avatar">
+                    {user?.fullName ? getInitials(user.fullName) : ""}
+                </div>
             </div>
 
 

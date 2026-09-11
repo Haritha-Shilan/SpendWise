@@ -11,22 +11,23 @@ export const useNotifications = () => {
     const [error, setError] = useState("");
     const [isUpdating, setIsUpdating] = useState(false);
 
-    const loadNotifications = async () => {
-        try {
-            setIsLoading(true);
-            setError("");
 
-            const data = await getNotifications();
-
-            setNotifications(data);
-        } catch {
-            setError("Failed to load notifications.");
-        } finally {
-            setIsLoading(false);
-        }
-    };
 
     useEffect(() => {
+        const loadNotifications = async () => {
+            try {
+                setIsLoading(true);
+                setError("");
+
+                const data = await getNotifications();
+
+                setNotifications(data);
+            } catch {
+                setError("Failed to load notifications.");
+            } finally {
+                setIsLoading(false);
+            }
+        };
         loadNotifications();
     }, []);
 

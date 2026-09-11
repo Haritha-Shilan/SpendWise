@@ -20,18 +20,23 @@ public class AdminDashboardService : IAdminDashboardService
 
     public async Task<ServiceResult<AdminDashboardResponseDto>> GetDashboard()
     {
-        var totalUsers = await _userManager.Users.CountAsync();
+        var users = await _userManager.GetUsersInRoleAsync("User");
+
+        var totalUsers = users.Count;
+
+        var activeUsers = users.Count(x => x.IsActive);
+
+        var inactiveUsers = users.Count(x => !x.IsActive);
 
         var now = DateTime.UtcNow;
 
-        var startOfMonth = new DateTime(now.Year,now.Month,1);
+        var startOfMonth = new DateTime(now.Year, now.Month, 1);
 
         var startOfNextMonth = startOfMonth.AddMonths(1);
 
-        var newThisMonth = await _userManager.Users
-            .CountAsync(x =>
-                x.CreatedAt >= startOfMonth &&
-                x.CreatedAt < startOfNextMonth);
+        var newThisMonth = users.Count(x =>
+            x.CreatedAt >= startOfMonth &&
+            x.CreatedAt < startOfNextMonth);
 
         var activeCategories = await _categoryRepository
         .GetAllAsync(new QueryOptions<CategoryMasterEntity>
@@ -44,7 +49,7 @@ public class AdminDashboardService : IAdminDashboardService
 
         var activeCategoryCount = activeCategories.Count();
 
-        var latestNotification = await GetLatestNotification();
+        var UnreadNotificationCount = await GetUnreadNotificationCount();
         var recentRegistrations = await GetRecentRegistrations();
 
         return new ServiceResult<AdminDashboardResponseDto>
@@ -53,35 +58,35 @@ public class AdminDashboardService : IAdminDashboardService
             Data = new AdminDashboardResponseDto
             {
                 TotalUsers = totalUsers,
+                ActiveUsers = activeUsers,
+                InactiveUsers = inactiveUsers,
                 NewThisMonth = newThisMonth,
                 ActiveCategories = activeCategoryCount,
-                LatestNotification = latestNotification,
-                RecentRegistrations = recentRegistrations
+                UnreadNotificationCount = await GetUnreadNotificationCount(),
+                RecentRegistrations = await GetRecentRegistrations()
             }
         };
     }
 
     private async Task<List<RecentRegistrationDto>> GetRecentRegistrations()
     {
-        var recentUsers = await _userManager.Users
+        var users = await _userManager.GetUsersInRoleAsync("User");
+
+        var recentUsers = users
             .OrderByDescending(x => x.CreatedAt)
             .Take(5)
-            .ToListAsync();
+            .ToList();
 
         return _mapper.Map<List<RecentRegistrationDto>>(recentUsers);
     }
 
-    private async Task<NotificationSummaryDto?> GetLatestNotification()
+    private async Task<int> GetUnreadNotificationCount()
     {
-        var notifications = await _notificationRepository
-            .GetAllAsync(new QueryOptions<NotificationEntity>
-            {
-                OrderBy = x => x.CreatedAt,
-                OrderDescending = true
-            });
-        var notification = notifications.FirstOrDefault();
+        var options = new QueryOptions<NotificationEntity>();
+        options.Filters.Add(x => !x.IsRead);
 
-
-        return _mapper.Map<NotificationSummaryDto?>(notification);
+        var unreadNotifications = await _notificationRepository.GetAllAsync(options);
+            
+        return unreadNotifications.Count();
     }
 }
