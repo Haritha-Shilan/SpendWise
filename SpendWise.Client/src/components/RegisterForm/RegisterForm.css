@@ -90,12 +90,6 @@
   text-decoration: underline;
 }
 
-.auth-error {
-  margin-top: 6px;
-  color: var(--expense);
-  font-size: 13px;
-}
-
 .auth-spinner {
     display: inline-block;
     width: 16px;
