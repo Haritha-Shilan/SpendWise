@@ -63,27 +63,48 @@
 .category-item-actions {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
     flex-shrink: 0;
 }
 
-.category-item-actions button {
+.category-action-button {
+    min-width: 78px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 7px 10px;
     border: none;
-    border-radius: 7px;
+    border-radius: 8px;
     background-color: transparent;
-    color: var(--primary);
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     cursor: pointer;
     text-decoration: none;
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.category-item-actions button:hover {
-    background-color: #eef0ff;
+.category-edit-button {
     color: var(--primary);
-    text-decoration: none;
+}
+
+.category-edit-button:hover {
+    background-color: #eef0ff;
+}
+
+.category-activate-button {
+    color: var(--income);
+}
+
+.category-activate-button:hover {
+    background-color: #e8f7f1;
+}
+
+.category-deactivate-button {
+    color: var(--expense);
+}
+
+.category-deactivate-button:hover {
+    background-color: #fdebed;
 }
 
 @media (max-width: 650px) {

@@ -95,10 +95,8 @@
                             : "Expense"));
 
             //AdminDashboard
-            CreateMap<ApplicationUser, RecentRegistrationDto>()
-                .ForMember(
-                    dest => dest.IsActive,
-                    opt => opt.MapFrom(src => true));
+            CreateMap<ApplicationUser, RecentRegistrationDto>();
+ 
         }
     }
 }

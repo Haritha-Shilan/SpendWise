@@ -6,6 +6,7 @@ import RegisterPage from './pages/Register/RegisterPage'
 import AdminDashboardPage from './pages/AdminDashboard/AdminDashboardPage'
 import AdminCategoryMasterPage from './pages/AdminCategoryMaster/AdminCategoryMasterPage'
 import AdminNotificationsPage from './pages/AdminNotifications/AdminNotificationsPage'
+import AdminUserManagementPage from './pages/AdminUserManagement/AdminUserManagementPage'
 import UserDashboardPage from './pages/UserDashboardPage'
 import TransactionsPage from './pages/TransactionsPage'
 import UserCategoriesPage from './pages/UserCategories/UserCategoriesPage'
@@ -31,6 +32,7 @@ function App() {
         <Route element={<ProtectedRoute allowedRole="Admin"></ProtectedRoute>}>
           <Route path='/admin' element={<AdminLayout />}>
             <Route path='dashboard' element={<AdminDashboardPage />}></Route>
+            <Route path='userManagement' element={<AdminUserManagementPage />}></Route>
             <Route path='categoryMaster' element={<AdminCategoryMasterPage />}></Route>
             <Route path='notifications' element={<AdminNotificationsPage />}></Route>
           </Route>
