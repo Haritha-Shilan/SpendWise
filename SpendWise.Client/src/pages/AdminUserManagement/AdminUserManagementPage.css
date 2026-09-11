@@ -1,0 +1,209 @@
+.admin-users-page {
+  padding: 28px 40px 40px;
+  background-color: var(--background);
+}
+
+.admin-users-header {
+  margin-bottom: 24px;
+}
+
+.admin-users-header h2 {
+  margin: 0 0 6px;
+  color: var(--text);
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.admin-users-header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.admin-users-update-error {
+  margin: 0 0 16px;
+  color: var(--expense);
+  font-size: 13px;
+}
+
+.admin-users-card {
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 10px 30px rgba(23, 32, 51, 0.05);
+}
+
+.admin-users-card-header {
+  margin-bottom: 18px;
+}
+
+.admin-users-card-header h3 {
+  margin: 0 0 5px;
+  color: var(--text);
+  font-size: 17px;
+  font-weight: 650;
+}
+
+.admin-users-card-header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.admin-users-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-user-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+}
+
+.admin-user-item:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.admin-user-item:last-child {
+  padding-bottom: 0;
+}
+
+.admin-user-details {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.admin-user-avatar {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #eef0ff;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.admin-user-name {
+  margin: 0 0 3px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.admin-user-email {
+  margin: 0 0 3px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.admin-user-joined {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.admin-user-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
+}
+
+.admin-user-actions button {
+  width: 100px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: transparent;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.admin-user-actions button:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.admin-user-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.admin-user-actions button svg {
+  font-size: 14px;
+}
+
+.admin-users-empty {
+  margin: 0;
+  padding: 10px 0 2px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.admin-users-error {
+  margin: 0;
+  color: var(--expense);
+  font-size: 13px;
+}
+
+@media (max-width: 700px) {
+  .admin-users-page {
+    padding: 20px;
+  }
+
+  .admin-user-item {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .admin-user-actions {
+    width: 100%;
+    padding-left: 54px;
+  }
+}
+
+.admin-user-activate-button {
+  border-color: var(--income);
+  color: var(--income);
+}
+
+.admin-user-activate-button:hover:not(:disabled) {
+  background-color: #e8f7f1;
+}
+
+.admin-user-deactivate-button {
+  border-color: var(--expense);
+  color: var(--expense);
+}
+
+.admin-user-deactivate-button:hover:not(:disabled) {
+  background-color: #fdebed;
+}
+
+.admin-user-name-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-user-name-row .status-badge {
+  flex-shrink: 0;
+}

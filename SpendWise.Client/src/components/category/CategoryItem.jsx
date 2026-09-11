@@ -38,6 +38,7 @@ function CategoryItem({ category, onEdit, onToggleState }) {
             <div className="category-item-actions">
                 <button
                     type="button"
+                    className="category-action-button category-edit-button"
                     onClick={() => onEdit(category)}
                 >
                     Edit
@@ -45,6 +46,10 @@ function CategoryItem({ category, onEdit, onToggleState }) {
 
                 <button
                     type="button"
+                    className={`category-action-button ${category.isActive
+                            ? "category-deactivate-button"
+                            : "category-activate-button"
+                        }`}
                     onClick={() => onToggleState(category)}
                 >
                     {actionLabel}

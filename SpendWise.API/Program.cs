@@ -1,5 +1,3 @@
-using SpendWise.API.Middleware;
-
 namespace SpendWise.API
 {
     public class Program
@@ -82,6 +80,7 @@ namespace SpendWise.API
             builder.Services.AddScoped<IUserReportService,UserReportService>();
             builder.Services.AddScoped<IAdminDashboardService, AdminDashboardService>();
             builder.Services.AddScoped<IEmailService, EmailService>();
+            builder.Services.AddScoped<IUserManagementService,UserManagementService>();
 
 
             //JWT

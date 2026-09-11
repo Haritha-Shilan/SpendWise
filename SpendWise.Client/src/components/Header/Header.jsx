@@ -10,7 +10,7 @@ function Header() {
     const title = pageTitles[location.pathname] || "SpendWise";
     const isAdmin = location.pathname.startsWith("/admin");
     const user = useSelector((state) => state.auth.user);
-    console.log(user);
+
     return (
         <header className="header">
             <div className="header-title">
