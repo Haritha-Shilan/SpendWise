@@ -35,78 +35,86 @@ function MonthlySummary({
             </div>
 
             <div className="monthly-summary-chart">
-                <ResponsiveContainer width="100%" height={260}>
-                    <BarChart
-                        data={chartData}
-                        margin={{
-                            top: 10,
-                            right: 10,
-                            left: 0,
-                            bottom: 5,
-                        }}
-                        barCategoryGap="30%"
-                    >
-                        <CartesianGrid
-                            vertical={false}
-                            stroke="#e8ebf2"
-                        />
-
-                        <XAxis
-                            dataKey="displayMonth"
-                            axisLine={false}
-                            tickLine={false}
-                            tick={{
-                                fill: "#7b8498",
-                                fontSize: 11,
+                <div
+                    style={{
+                        width: `${Math.max(data.length * 80, 700)}px`,
+                        height: "300px",
+                    }}
+                >
+                    <ResponsiveContainer width="100%" height={260}>
+                        <BarChart
+                            data={chartData}
+                            margin={{
+                                top: 10,
+                                right: 10,
+                                left: 0,
+                                bottom: 5,
                             }}
-                        />
+                            barCategoryGap="30%"
+                        >
+                            <CartesianGrid
+                                vertical={false}
+                                stroke="#e8ebf2"
+                            />
 
-                        <YAxis
-                            axisLine={false}
-                            tickLine={false}
-                            tick={{
-                                fill: "#7b8498",
-                                fontSize: 11,
-                            }}
-                        />
+                            <XAxis
+                                dataKey="displayMonth"
+                                interval={0}
+                                axisLine={false}
+                                tickLine={false}
+                                tick={{
+                                    fill: "#7b8498",
+                                    fontSize: 11,
+                                }}
+                            />
 
-                        <Tooltip
-                            contentStyle={{
-                                border: "1px solid #e8ebf2",
-                                borderRadius: "8px",
-                                boxShadow: "0 6px 20px rgba(23, 32, 51, 0.08)",
-                                fontSize: "12px",
-                            }}
-                        />
+                            <YAxis
+                                axisLine={false}
+                                tickLine={false}
+                                tick={{
+                                    fill: "#7b8498",
+                                    fontSize: 11,
+                                }}
+                            />
 
-                        <Legend
-                            verticalAlign="bottom"
-                            align="left"
-                            iconType="circle"
-                            wrapperStyle={{
-                                paddingTop: "10px",
-                                fontSize: "12px",
-                                color: "#7b8498",
-                            }}
-                        />
+                            <Tooltip
+                                contentStyle={{
+                                    border: "1px solid #e8ebf2",
+                                    borderRadius: "8px",
+                                    boxShadow: "0 6px 20px rgba(23, 32, 51, 0.08)",
+                                    fontSize: "12px",
+                                }}
+                            />
 
-                        <Bar
-                            dataKey="income"
-                            name="Income"
-                            fill="#8c8ff0"
-                            radius={[5, 5, 0, 0]}
-                            barSize={14}
-                        />
+                            <Legend
+                                verticalAlign="bottom"
+                                align="left"
+                                iconType="circle"
+                                wrapperStyle={{
+                                    paddingTop: "10px",
+                                    fontSize: "12px",
+                                    color: "#7b8498",
+                                }}
+                            />
 
-                        <Bar
-                            dataKey="expense"
-                            name="Expense"
-                            fill="#e79aa5"
-                            radius={[5, 5, 0, 0]}
-                            barSize={14}
-                        />
-                    </BarChart>
-                </ResponsiveContainer>
+                            <Bar
+                                dataKey="income"
+                                name="Income"
+                                fill="#8c8ff0"
+                                radius={[5, 5, 0, 0]}
+                                barSize={14}
+                            />
+
+                            <Bar
+                                dataKey="expense"
+                                name="Expense"
+                                fill="#e79aa5"
+                                radius={[5, 5, 0, 0]}
+                                barSize={14}
+                            />
+                        </BarChart>
+                    </ResponsiveContainer>
+                </div>
             </div>
         </div>
     );

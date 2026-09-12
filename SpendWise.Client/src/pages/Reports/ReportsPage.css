@@ -25,3 +25,56 @@
         padding: 20px;
     }
 }
+
+.reports-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+@media (max-width: 1000px) {
+    .reports-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .reports-summary-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.reports-monthly-summary {
+    margin-top: 20px;
+}
+
+.reports-analysis-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+@media (max-width: 900px) {
+    .reports-analysis-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.reports-bottom-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.reports-bottom-grid > * {
+    min-width: 0;
+}
+
+@media (max-width: 900px) {
+    .reports-bottom-grid {
+        grid-template-columns: 1fr;
+    }
+}
