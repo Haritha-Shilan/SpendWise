@@ -25,7 +25,7 @@ function ExpenseCategoryPie({ data = [] }) {
 
     return (
         <div className="expense-category-pie">
-            <ResponsiveContainer width="100%" height={280}>
+            <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                     <Pie
                         data={data}
@@ -33,7 +33,7 @@ function ExpenseCategoryPie({ data = [] }) {
                         nameKey="categoryName"
                         cx="38%"
                         cy="50%"
-                        outerRadius={105}
+                        outerRadius="70%"
                         stroke="none"
                     >
                         {data.map((item, index) => (

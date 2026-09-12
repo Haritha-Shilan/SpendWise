@@ -1,0 +1,60 @@
+.income-summary {
+    padding: 22px;
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(23, 32, 51, 0.05);
+}
+
+.income-summary-header {
+    margin-bottom: 20px;
+}
+
+.income-summary-header h3 {
+    margin: 0 0 5px;
+    color: var(--text);
+    font-size: 17px;
+    font-weight: 650;
+}
+
+.income-summary-header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.income-summary-table {
+    display: flex;
+    flex-direction: column;
+}
+
+.income-summary-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    align-items: center;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    font-size: 13px;
+}
+
+.income-summary-row strong {
+    text-align: right;
+    font-size: 14px;
+}
+
+.income-summary-header-row {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.income-summary-header-row span:last-child {
+    text-align: right;
+}
+
+.income-summary-empty {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
