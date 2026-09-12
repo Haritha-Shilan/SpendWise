@@ -1,0 +1,119 @@
+.transaction-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 18px 20px;
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
+
+.transaction-filter input,
+.transaction-filter select {
+    height: 38px;
+    padding: 0 11px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--white);
+    color: var(--text);
+    font-size: 13px;
+    outline: none;
+}
+
+.transaction-filter input:focus,
+.transaction-filter select:focus {
+    border-color: var(--primary-light);
+}
+
+.transaction-filter input[type="text"] {
+    width: 210px;
+}
+
+.transaction-filter select {
+    min-width: 145px;
+}
+
+.transaction-filter input[type="date"] {
+    width: 135px;
+}
+
+.transaction-filter-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.transaction-filter-actions button {
+    height: 38px;
+    padding: 0 13px;
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.transaction-filter-clear {
+    background-color: transparent;
+    color: var(--muted);
+}
+
+.transaction-filter-clear:hover {
+    background-color: #f1f2f5;
+    color: var(--text);
+}
+
+.transaction-filter-apply {
+    background-color: transparent;
+    color: var(--primary);
+}
+
+.transaction-filter-apply:hover {
+    background-color: #eef0ff;
+}
+
+.transaction-filter-add {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.transaction-filter-add:hover {
+    background-color: var(--primary-light);
+}
+
+@media (max-width: 1100px) {
+    .transaction-filter-actions {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 650px) {
+    .transaction-filter {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .transaction-filter input[type="text"],
+    .transaction-filter input[type="number"],
+    .transaction-filter select,
+    .transaction-filter input[type="date"] {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .transaction-filter-actions {
+        width: 100%;
+    }
+
+    .transaction-filter-actions button {
+        flex: 1;
+    }
+}
+
+.transaction-filter input[type="number"] {
+    width: 120px;
+}

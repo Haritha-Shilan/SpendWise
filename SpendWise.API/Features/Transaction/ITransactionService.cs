@@ -15,5 +15,7 @@
         public Task<ServiceResult<bool>> DeleteAsync(int id);
 
         public Task<ServiceResult<TransactionAttachment>> GetAttachmentAsync(int id);
+
+        public Task<ServiceResult<TransactionFilterOptionsDto>> GetFilterOptionsAsync();
     }
 }

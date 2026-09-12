@@ -21,7 +21,7 @@ function Header() {
             <div className="header-user">
                 <div className="header-user-info">
                     <span className="header-user-name">
-                        {isAdmin ? "Administrator" : "User"}
+                        {user?.fullName ?? ""}
                     </span>
                     <span className="header-user-role">
                         {isAdmin ? "Admin" : "Personal account"}

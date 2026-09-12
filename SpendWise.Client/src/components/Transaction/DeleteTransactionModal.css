@@ -1,0 +1,94 @@
+.delete-transaction-modal {
+    border: none;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.delete-transaction-message {
+    margin: 0 0 16px;
+    color: var(--text);
+    font-size: 14px;
+}
+
+.delete-transaction-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 13px 14px;
+    border-radius: 9px;
+    background-color: var(--background);
+}
+
+.delete-transaction-summary div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.delete-transaction-summary span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.delete-transaction-summary strong {
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.delete-transaction-warning {
+    margin: 14px 0 0;
+    color: var(--expense);
+    font-size: 12px;
+}
+
+.delete-transaction-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    padding: 0 16px 16px;
+}
+
+.delete-transaction-actions button {
+    min-width: 82px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.delete-transaction-cancel {
+    background-color: transparent;
+    color: var(--muted);
+}
+
+.delete-transaction-cancel:hover:not(:disabled) {
+    background-color: #f1f2f5;
+    color: var(--text);
+}
+
+.delete-transaction-confirm {
+    background-color: var(--expense);
+    color: var(--white);
+}
+
+.delete-transaction-confirm:hover:not(:disabled) {
+    opacity: 0.9;
+}
+
+.delete-transaction-actions button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.delete-transaction-error {
+    margin: 12px 0 0;
+    color: var(--expense);
+    font-size: 12px;
+    font-weight: 500;
+}

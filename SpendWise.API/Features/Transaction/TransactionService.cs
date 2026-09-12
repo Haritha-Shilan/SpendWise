@@ -417,6 +417,30 @@
             };
         }
 
+        public async Task<ServiceResult<TransactionFilterOptionsDto>> GetFilterOptionsAsync()
+        {
+            var categoryOptions = new QueryOptions<UserCategoryEntity>();
+            categoryOptions.Filters.Add(x => x.UserId == _userId);
+
+            var categories =
+                await _userCategoryRepository.GetAllAsync(categoryOptions);
+
+            var paymentMethods =
+                await _paymentMethodRepository.GetAllAsync();
+
+            var result = new TransactionFilterOptionsDto
+            {
+                Categories = _mapper.Map<IEnumerable<UserCategoryFilterOptionDto>>(categories),
+                PaymentMethods = _mapper.Map<IEnumerable<PaymentMethodFilterOptionDto>>(paymentMethods)
+            };
+
+            return new ServiceResult<TransactionFilterOptionsDto>
+            {
+                Status = ServiceResultStatus.Success,
+                Data = result
+            };
+        }
+
         #region ValidationMethods
         private async Task<ServiceResult<bool>> ValidateCreateAsync(TransactionCreateDto dto)
         {

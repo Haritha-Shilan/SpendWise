@@ -18,7 +18,7 @@
         public DateTime Date { get; set; }
 
         [MaxLength(500)]
-        public string Description { get; set; } = string.Empty;
+        public string? Description { get; set; } = string.Empty;
 
         public IFormFile? Attachment { get; set; }
 

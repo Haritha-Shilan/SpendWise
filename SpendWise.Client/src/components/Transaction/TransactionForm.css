@@ -1,0 +1,210 @@
+.transaction-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.transaction-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.transaction-form-field label {
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.transaction-form-field input,
+.transaction-form-field select,
+.transaction-form-field textarea {
+    width: 100%;
+    padding: 9px 11px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--white);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.transaction-form-field input:focus,
+.transaction-form-field select:focus,
+.transaction-form-field textarea:focus {
+    border-color: var(--primary-light);
+}
+
+.transaction-form-field textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.transaction-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.transaction-existing-attachment {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 9px 11px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: #f7f8fc;
+}
+
+.transaction-existing-attachment span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text);
+    font-size: 12px;
+}
+
+.transaction-existing-attachment button {
+    flex-shrink: 0;
+    border: none;
+    background-color: transparent;
+    color: var(--expense);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.transaction-existing-attachment button:hover {
+    text-decoration: underline;
+}
+
+.transaction-selected-file {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.transaction-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.transaction-form-actions button {
+    min-width: 90px;
+    padding: 8px 13px;
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.transaction-form-cancel {
+    background-color: transparent;
+    color: var(--muted);
+}
+
+.transaction-form-cancel:hover {
+    background-color: #f1f2f5;
+    color: var(--text);
+}
+
+.transaction-form-save {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.transaction-form-save:hover:not(:disabled) {
+    background-color: var(--primary-light);
+}
+
+.transaction-form-save:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+@media (max-width: 550px) {
+    .transaction-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .transaction-form-actions {
+        width: 100%;
+    }
+
+    .transaction-form-actions button {
+        flex: 1;
+    }
+}
+
+.transaction-select__control {
+    min-height: 38px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: none;
+    background-color: var(--white);
+    font-size: 13px;
+}
+
+.transaction-select__control:hover {
+    border-color: var(--border);
+}
+
+.transaction-select__control--is-focused {
+    border-color: var(--primary-light) !important;
+    box-shadow: none !important;
+}
+
+.transaction-select__value-container {
+    padding: 0 11px;
+}
+
+.transaction-select__placeholder {
+    color: var(--muted);
+}
+
+.transaction-select__single-value {
+    color: var(--text);
+}
+
+.transaction-select__input-container {
+    margin: 0;
+    padding: 0;
+}
+
+.transaction-select__menu {
+    z-index: 1055;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.transaction-select__option {
+    padding: 9px 11px;
+    font-size: 13px;
+}
+
+.transaction-select__option--is-focused {
+    background-color: #eef0ff;
+    color: var(--text);
+}
+
+.transaction-select__option--is-selected {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.transaction-select__indicator-separator {
+    display: none;
+}
+
+.transaction-select__dropdown-indicator {
+    color: var(--muted);
+}

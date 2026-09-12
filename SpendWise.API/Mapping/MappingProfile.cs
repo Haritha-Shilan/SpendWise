@@ -78,6 +78,9 @@
                             ? src.TransactionAttachment.FileName
                             : null));
 
+            CreateMap<UserCategoryEntity, UserCategoryFilterOptionDto>();
+            CreateMap<PaymentMethodEntity, PaymentMethodFilterOptionDto>();
+
             //UserDashboard
             CreateMap<Transaction, RecentTransactionDto>()
                 .ForMember(
