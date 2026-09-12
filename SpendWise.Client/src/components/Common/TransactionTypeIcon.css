@@ -1,0 +1,22 @@
+.transaction-type-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+  font-size: 20px;
+}
+
+.transaction-type-icon.income {
+  color: var(--income);
+  background-color: #e8f7f1;
+}
+
+.transaction-type-icon.expense {
+  color: var(--expense);
+  background-color: #fdebed;
+}

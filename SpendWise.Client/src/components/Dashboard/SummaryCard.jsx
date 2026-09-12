@@ -1,8 +1,8 @@
 import './SummaryCard.css'
 
-function SummaryCard({ title, value, description, icon: Icon }) {
+function SummaryCard({ title, value, description, icon: Icon, variant = "default", }) {
     return (
-        <div className="summary-card">
+        <div className={`summary-card summary-card-${variant}`}>
             <div className="summary-card-content">
                 <p className="summary-card-title">
                     {title}

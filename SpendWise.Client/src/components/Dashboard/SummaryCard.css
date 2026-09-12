@@ -67,3 +67,30 @@
         font-size: 30px;
     }
 }
+
+.summary-card-income .summary-card-value {
+    color: var(--income);
+}
+
+.summary-card-income .summary-card-icon {
+    background-color: #e8f7f1;
+    color: var(--income);
+}
+
+.summary-card-expense .summary-card-value {
+    color: var(--expense);
+}
+
+.summary-card-expense .summary-card-icon {
+    background-color: #fdebed;
+    color: var(--expense);
+}
+
+.summary-card-balance .summary-card-value {
+    color: var(--primary);
+}
+
+.summary-card-balance .summary-card-icon {
+    background-color: #eef0ff;
+    color: var(--primary);
+}

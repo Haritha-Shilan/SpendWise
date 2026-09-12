@@ -7,10 +7,10 @@ import AdminDashboardPage from './pages/AdminDashboard/AdminDashboardPage'
 import AdminCategoryMasterPage from './pages/AdminCategoryMaster/AdminCategoryMasterPage'
 import AdminNotificationsPage from './pages/AdminNotifications/AdminNotificationsPage'
 import AdminUserManagementPage from './pages/AdminUserManagement/AdminUserManagementPage'
-// import UserDashboardPage from './pages/UserDashboardPage'
+import UserDashboardPage from './pages/UserDashboard/UserDashboardPage'
 import TransactionsPage from './pages/Transactions/TransactionsPage'
 import UserCategoriesPage from './pages/UserCategories/UserCategoriesPage'
-// import ReportsPage from './pages/ReportsPage'
+import ReportsPage from './pages/Reports/ReportsPage'
 import AdminLayout from './layouts/AdminLayout'
 import UserLayout from './layouts/UserLayout'
 import { useInitializeAuth } from './hooks/useInitializeAuth'
@@ -41,10 +41,10 @@ function App() {
         {/* User Routes  */}
         <Route element={<ProtectedRoute allowedRole="User"></ProtectedRoute>}>
           <Route path='/user' element={<UserLayout />}>
-            {/* <Route path='dashboard' element={<UserDashboardPage />}></Route> */}
+            <Route path='dashboard' element={<UserDashboardPage />}></Route>
             <Route path='transactions' element={<TransactionsPage />}></Route>
             <Route path='categories' element={<UserCategoriesPage />}></Route>
-            {/* <Route path='reports' element={<ReportsPage />}></Route> */}
+            <Route path='reports' element={<ReportsPage />}></Route>
           </Route>
         </Route>
       </Routes>

@@ -1,0 +1,27 @@
+.reports-page {
+    padding: 28px 40px 40px;
+    background-color: var(--background);
+}
+
+.reports-header {
+    margin-bottom: 24px;
+}
+
+.reports-header h2 {
+    margin: 0 0 6px;
+    color: var(--text);
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.reports-header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+@media (max-width: 700px) {
+    .reports-page {
+        padding: 20px;
+    }
+}
