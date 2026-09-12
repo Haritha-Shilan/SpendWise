@@ -1,0 +1,146 @@
+.transaction-list {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.transaction-list-header-row,
+.transaction-item {
+    display: grid;
+    grid-template-columns:
+        110px
+        90px
+        130px
+        120px
+        140px
+        minmax(180px, 1fr)
+        90px;
+    align-items: center;
+    gap: 16px;
+    min-width: 900px;
+}
+
+.transaction-list-header-row {
+    padding: 0 0 12px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.transaction-item {
+    padding: 16px 0;
+    border-top: 1px solid var(--border);
+    color: var(--text);
+    font-size: 13px;
+}
+
+.transaction-item-date {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.transaction-item-category {
+    color: var(--text);
+    font-weight: 500;
+}
+
+.transaction-item-payment {
+    color: var(--muted);
+}
+
+.transaction-item-description {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+.transaction-item-description > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.transaction-type {
+    display: inline-flex;
+    width: fit-content;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.transaction-type.income {
+    background-color: #e8f7f1;
+    color: var(--income);
+}
+
+.transaction-type.expense {
+    background-color: #fdebed;
+    color: var(--expense);
+}
+
+.transaction-item-amount {
+    font-weight: 700;
+}
+
+.transaction-item-amount.income {
+    color: var(--income);
+}
+
+.transaction-item-amount.expense {
+    color: var(--expense);
+}
+
+.transaction-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.transaction-item-actions button,
+.transaction-attachment-button {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    border-radius: 7px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.transaction-edit-button {
+    color: var(--primary);
+}
+
+.transaction-edit-button:hover {
+    background-color: #eef0ff;
+}
+
+.transaction-delete-button {
+    color: var(--expense);
+}
+
+.transaction-delete-button:hover {
+    background-color: #fdebed;
+}
+
+.transaction-attachment-button {
+    flex-shrink: 0;
+    color: var(--muted);
+}
+
+.transaction-attachment-button:hover {
+    background-color: #f1f2f5;
+    color: var(--text);
+}
+
+.transaction-item-actions svg,
+.transaction-attachment-button svg {
+    width: 15px;
+    height: 15px;
+}

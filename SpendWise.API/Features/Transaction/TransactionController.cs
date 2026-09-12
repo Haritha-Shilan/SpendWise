@@ -71,7 +71,7 @@
         }
 
 
-        [HttpPut]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id,[FromForm] TransactionUpdateDto dto)
         {
             var result = await _service.UpdateAsync(id,dto);
@@ -118,6 +118,18 @@
                 _ => BadRequest(result.Error)
             };
         }
-    
+
+        [HttpGet("filter-options")]
+        public async Task<ActionResult<TransactionFilterOptionsDto>> GetFilterOptions()
+        {
+            var result = await _service.GetFilterOptionsAsync();
+
+            return result.Status switch
+            {
+                ServiceResultStatus.Success => Ok(result.Data),
+                _ => BadRequest(result.Error)
+            };
+        }
+
     }
 }
