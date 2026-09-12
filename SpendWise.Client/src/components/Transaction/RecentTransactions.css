@@ -1,0 +1,123 @@
+.recent-transactions {
+    padding: 22px;
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(23, 32, 51, 0.05);
+    width: 100%;
+}
+
+.recent-transactions-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    gap: 20px;
+}
+
+.recent-transactions-header h3 {
+    margin: 0 0 5px;
+    color: var(--text);
+    font-size: 17px;
+    font-weight: 650;
+}
+
+.recent-transactions-header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.recent-transactions-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.recent-transaction-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 0;
+    border-top: 1px solid var(--border);
+}
+
+.recent-transaction-info {
+   flex: 1;
+     min-width: 0;
+}
+
+.recent-transaction-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 16px;
+}
+
+.recent-transaction-category {
+    margin: 0 0 3px;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.recent-transaction-description {
+    margin: 0 0 3px;
+    color: var(--muted);
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.recent-transaction-date {
+    margin: 0;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.recent-transaction-amount {
+    margin-left: auto;
+}
+
+.recent-transaction-amount.income {
+    color: var(--income);
+}
+
+.recent-transaction-amount.expense {
+    color: var(--expense);
+}
+
+.recent-transactions-view-all {
+    margin: 2px 0 0;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.recent-transactions-view-all:hover {
+    text-decoration: underline;
+}
+
+
+.recent-transactions-empty {
+    margin: 0;
+    padding: 10px 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+@media (max-width: 600px) {
+    .recent-transaction-item {
+        align-items: flex-start;
+    }
+
+    .recent-transaction-amount {
+        padding-top: 2px;
+    }
+}

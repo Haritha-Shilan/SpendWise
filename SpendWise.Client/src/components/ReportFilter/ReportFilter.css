@@ -1,0 +1,78 @@
+.report-filter {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    padding: 20px 22px;
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
+
+.report-filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.report-filter-field label {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.report-filter-field select,
+.report-filter-field input {
+    min-width: 180px;
+    height: 40px;
+    padding: 0 11px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--white);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.report-filter-field select:focus,
+.report-filter-field input:focus {
+    border-color: var(--primary-light);
+}
+
+.report-filter-apply {
+    height: 40px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--primary);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.report-filter-apply:hover {
+    background-color: var(--primary-light);
+}
+
+@media (max-width: 700px) {
+    .report-filter {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .report-filter-field select,
+    .report-filter-field input,
+    .report-filter-apply {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+.report-filter-error {
+    margin: 0;
+    color: var(--expense);
+    font-size: 12px;
+}

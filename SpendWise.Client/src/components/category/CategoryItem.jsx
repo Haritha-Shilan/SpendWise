@@ -1,21 +1,17 @@
-import { FiArrowDownRight, FiArrowUpRight } from "react-icons/fi";
 import './CategoryItem.css'
-
+import TransactionTypeIcon from "../Common/TransactionTypeIcon";
 function CategoryItem({ category, onEdit, onToggleState }) {
     const actionLabel = category.isActive
         ? "Deactivate"
         : "Activate";
 
-    const CategoryIcon =
-        category.typeId === 1
-            ? FiArrowDownRight
-            : FiArrowUpRight;
-
+    console.log(category);
     return (
         <div className="category-item">
             <div className="category-item-info">
                 <div className="category-item-icon">
-                    <CategoryIcon />
+                    {/* <CategoryIcon /> */}
+                    <TransactionTypeIcon type={category.typeName} />
                 </div>
 
                 <div>
@@ -47,8 +43,8 @@ function CategoryItem({ category, onEdit, onToggleState }) {
                 <button
                     type="button"
                     className={`category-action-button ${category.isActive
-                            ? "category-deactivate-button"
-                            : "category-activate-button"
+                        ? "category-deactivate-button"
+                        : "category-activate-button"
                         }`}
                     onClick={() => onToggleState(category)}
                 >
