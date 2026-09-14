@@ -9,6 +9,7 @@
     border-radius: 14px;
 }
 
+/* Native inputs and selects */
 .transaction-filter input,
 .transaction-filter select {
     height: 38px;
@@ -38,6 +39,138 @@
     width: 135px;
 }
 
+.transaction-filter input[type="number"] {
+    width: 120px;
+}
+
+/* React Select - Category and Payment Method */
+.transaction-filter-category,
+.transaction-filter-payment-method {
+    flex-shrink: 0;
+}
+
+.transaction-filter-category {
+    width: 145px;
+}
+
+.transaction-filter-payment-method {
+    width: 170px;
+}
+
+.transaction-filter-category .transaction-select__control,
+.transaction-filter-payment-method .transaction-select__control {
+    min-height: 38px;
+    height: 38px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--white);
+    box-shadow: none;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.transaction-filter-category .transaction-select__control:hover,
+.transaction-filter-payment-method .transaction-select__control:hover {
+    border-color: var(--border);
+}
+
+.transaction-filter-category .transaction-select__control--is-focused,
+.transaction-filter-payment-method .transaction-select__control--is-focused {
+    border-color: var(--primary-light);
+    box-shadow: none;
+}
+
+.transaction-filter-category .transaction-select__value-container,
+.transaction-filter-payment-method .transaction-select__value-container {
+    padding: 0 11px;
+}
+
+.transaction-filter-category .transaction-select__placeholder,
+.transaction-filter-payment-method .transaction-select__placeholder,
+.transaction-filter-category .transaction-select__single-value,
+.transaction-filter-payment-method .transaction-select__single-value {
+    margin: 0;
+    color: var(--text);
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.transaction-filter-category .transaction-select__input-container,
+.transaction-filter-payment-method .transaction-select__input-container {
+    margin: 0;
+    padding: 0;
+}
+
+.transaction-filter-category .transaction-select__input,
+.transaction-filter-payment-method .transaction-select__input {
+    margin: 0;
+    padding: 0;
+}
+
+.transaction-filter-category .transaction-select__indicators,
+.transaction-filter-payment-method .transaction-select__indicators {
+    height: 36px;
+}
+
+.transaction-filter-category .transaction-select__indicator-separator,
+.transaction-filter-payment-method .transaction-select__indicator-separator {
+    display: none;
+}
+
+.transaction-filter-category .transaction-select__dropdown-indicator,
+.transaction-filter-payment-method .transaction-select__dropdown-indicator {
+    padding: 8px;
+    color: var(--muted);
+}
+
+.transaction-filter-category .transaction-select__dropdown-indicator:hover,
+.transaction-filter-payment-method .transaction-select__dropdown-indicator:hover {
+    color: var(--text);
+}
+
+.transaction-filter-category .transaction-select__clear-indicator,
+.transaction-filter-payment-method .transaction-select__clear-indicator {
+    padding: 8px 4px;
+    color: var(--muted);
+}
+
+.transaction-filter-category .transaction-select__clear-indicator:hover,
+.transaction-filter-payment-method .transaction-select__clear-indicator:hover {
+    color: var(--text);
+}
+
+.transaction-filter-category .transaction-select__menu,
+.transaction-filter-payment-method .transaction-select__menu {
+    z-index: 1000;
+    margin-top: 4px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(23, 32, 51, 0.08);
+    overflow: hidden;
+    font-size: 13px;
+}
+
+.transaction-filter-category .transaction-select__option,
+.transaction-filter-payment-method .transaction-select__option {
+    padding: 9px 11px;
+    cursor: pointer;
+}
+
+.transaction-filter-category .transaction-select__option--is-focused,
+.transaction-filter-payment-method .transaction-select__option--is-focused {
+    background-color: #eef0ff;
+    color: var(--text);
+}
+
+.transaction-filter-category .transaction-select__option--is-selected,
+.transaction-filter-payment-method .transaction-select__option--is-selected {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+/* Filter actions */
 .transaction-filter-actions {
     display: flex;
     align-items: center;
@@ -84,6 +217,7 @@
     background-color: var(--primary-light);
 }
 
+/* Medium screens */
 @media (max-width: 1100px) {
     .transaction-filter-actions {
         width: 100%;
@@ -91,6 +225,7 @@
     }
 }
 
+/* Small screens */
 @media (max-width: 650px) {
     .transaction-filter {
         flex-direction: column;
@@ -100,7 +235,9 @@
     .transaction-filter input[type="text"],
     .transaction-filter input[type="number"],
     .transaction-filter select,
-    .transaction-filter input[type="date"] {
+    .transaction-filter input[type="date"],
+    .transaction-filter-category,
+    .transaction-filter-payment-method {
         width: 100%;
         min-width: 0;
     }
@@ -114,6 +251,3 @@
     }
 }
 
-.transaction-filter input[type="number"] {
-    width: 120px;
-}
