@@ -48,24 +48,48 @@ function TransactionForm({
         (category) => category.isActive
     );
 
-    const categoryOptions = activeCategories
+    const currentCategory = filterOptions.categories.find(
+        (category) =>
+            category.id === Number(formData.userCategoryId)
+    );
+
+    const categorySource =
+        currentCategory && !currentCategory.isActive
+            ? [...activeCategories, currentCategory]
+            : activeCategories;
+
+    const categoryOptions = categorySource
         .filter(
             (category) =>
                 category.typeId === Number(formData.categoryTypeId)
         )
         .map((category) => ({
             value: category.id,
-            label: category.name,
+            label: category.isActive
+                ? category.name
+                : `${category.name} (Inactive)`,
         }));
 
     const activePaymentMethods = filterOptions.paymentMethods.filter(
         (paymentMethod) => paymentMethod.isActive
     );
 
-    const paymentMethodOptions = activePaymentMethods.map(
+    const currentPaymentMethod = filterOptions.paymentMethods.find(
+        (paymentMethod) =>
+            paymentMethod.id === Number(formData.paymentMethodId)
+    );
+
+    const paymentMethodSource =
+        currentPaymentMethod && !currentPaymentMethod.isActive
+            ? [...activePaymentMethods, currentPaymentMethod]
+            : activePaymentMethods;
+
+    const paymentMethodOptions = paymentMethodSource.map(
         (paymentMethod) => ({
             value: paymentMethod.id,
-            label: paymentMethod.name,
+            label: paymentMethod.isActive
+                ? paymentMethod.name
+                : `${paymentMethod.name} (Inactive)`,
         })
     );
 

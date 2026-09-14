@@ -2,7 +2,7 @@ import "./CategoryForm.css";
 import { categoryTypes } from "../../config/categoryTypes";
 import { useState } from "react";
 
-function CategoryForm({ mode, category, onCancel, onSubmit, isSaving, saveError, defaultTypeId }) {
+function CategoryForm({ mode, category, onCancel, onSubmit, isSaving, saveError, clearSaveError, defaultTypeId }) {
     const isEditMode = mode === "edit";
 
     const [formData, setFormData] = useState({
@@ -12,7 +12,7 @@ function CategoryForm({ mode, category, onCancel, onSubmit, isSaving, saveError,
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-
+        clearSaveError();
         setFormData((prev) => ({
             ...prev,
             [name]: value

@@ -28,6 +28,10 @@ export const useCategories = (basePath) => {
         loadCategories();
     }, [basePath]);
 
+    const clearSaveError = () => {
+        setSaveError("");
+    };
+
     // Add
     const addCategory = async (categoryData) => {
         try {
@@ -124,6 +128,7 @@ export const useCategories = (basePath) => {
         addCategory,
         isSaving,
         saveError,
+        clearSaveError,
         editCategory,
         toggleCategoryState
     };

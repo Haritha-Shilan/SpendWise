@@ -1,5 +1,6 @@
 import { categoryTypes } from "../../config/categoryTypes";
 import "./TransactionFilter.css";
+import Select from "react-select";
 
 function TransactionFilter({
     filterOptions,
@@ -9,6 +10,54 @@ function TransactionFilter({
     onClear,
     onAdd,
 }) {
+
+    const expenseCategories = filterOptions.categories.filter(
+        (category) => category.typeId === categoryTypes.expense.id
+    );
+
+    const incomeCategories = filterOptions.categories.filter(
+        (category) => category.typeId === categoryTypes.income.id
+    );
+
+    const paymentMethodOptions = filterOptions.paymentMethods.map(
+        (paymentMethod) => ({
+            value: paymentMethod.id,
+            label: paymentMethod.name,
+        })
+    );
+
+    const categoryOptions = [];
+
+    if (filters.categoryTypeId === "") {
+        categoryOptions.push({
+            label: "Expense",
+            options: expenseCategories.map((category) => ({
+                value: category.id,
+                label: category.name,
+            })),
+        });
+
+        categoryOptions.push({
+            label: "Income",
+            options: incomeCategories.map((category) => ({
+                value: category.id,
+                label: category.name,
+            })),
+        });
+    } else {
+        categoryOptions.push(
+            ...filterOptions.categories
+                .filter(
+                    (category) =>
+                        category.typeId === Number(filters.categoryTypeId)
+                )
+                .map((category) => ({
+                    value: category.id,
+                    label: category.name,
+                }))
+        );
+    }
+
     return (
         <div className="transaction-filter">
 
@@ -38,23 +87,51 @@ function TransactionFilter({
                 </option>
             </select>
 
-            <select
-                value={filters.userCategoryId}
-                onChange={(e) =>
-                    onFilterChange("userCategoryId", e.target.value)
+            <Select
+                inputId="transaction-category-filter"
+                options={categoryOptions}
+                value={
+                    categoryOptions
+                        .flatMap((group) => group.options ?? [group])
+                        .find(
+                            (option) =>
+                                option.value === Number(filters.userCategoryId)
+                        ) || null
                 }
-            >
-                <option value="">All Categories</option>
+                onChange={(option) =>
+                    onFilterChange(
+                        "userCategoryId",
+                        option ? option.value : ""
+                    )
+                }
+                placeholder="All Categories"
+                isClearable
+                isSearchable
+                className="transaction-filter-category"
+                classNames={{
+                    control: (state) =>
+                        state.isFocused
+                            ? "transaction-select__control transaction-select__control--is-focused"
+                            : "transaction-select__control",
+                    valueContainer: () =>
+                        "transaction-select__value-container",
+                    placeholder: () =>
+                        "transaction-select__placeholder",
+                    singleValue: () =>
+                        "transaction-select__single-value",
+                    input: () =>
+                        "transaction-select__input-container",
+                    menu: () =>
+                        "transaction-select__menu",
+                    option: (state) =>
+                        state.isFocused
+                            ? "transaction-select__option transaction-select__option--is-focused"
+                            : state.isSelected
+                                ? "transaction-select__option transaction-select__option--is-selected"
+                                : "transaction-select__option",
+                }}
+            />
 
-                {filterOptions.categories.map((category) => (
-                    <option
-                        key={category.id}
-                        value={category.id}
-                    >
-                        {category.name}
-                    </option>
-                ))}
-            </select>
 
             <input
                 type="date"
@@ -93,24 +170,52 @@ function TransactionFilter({
                     onFilterChange("maxAmount", e.target.value)
                 }
             />
-
-            <select
-                value={filters.paymentMethodId}
-                onChange={(e) =>
-                    onFilterChange("paymentMethodId", e.target.value)
+            <Select
+                inputId="transaction-payment-method-filter"
+                options={paymentMethodOptions}
+                value={
+                    paymentMethodOptions.find(
+                        (option) =>
+                            option.value === Number(filters.paymentMethodId)
+                    ) || null
                 }
-            >
-                <option value="">All Payment Methods</option>
-
-                {filterOptions.paymentMethods.map((paymentMethod) => (
-                    <option
-                        key={paymentMethod.id}
-                        value={paymentMethod.id}
-                    >
-                        {paymentMethod.name}
-                    </option>
-                ))}
-            </select>
+                onChange={(option) =>
+                    onFilterChange(
+                        "paymentMethodId",
+                        option ? option.value : ""
+                    )
+                }
+                placeholder="All Payment Methods"
+                isClearable
+                isSearchable
+                className="transaction-filter-payment-method"
+                classNames={{
+                    control: (state) =>
+                        state.isFocused
+                            ? "transaction-select__control transaction-select__control--is-focused"
+                            : "transaction-select__control",
+                    valueContainer: () =>
+                        "transaction-select__value-container",
+                    placeholder: () =>
+                        "transaction-select__placeholder",
+                    singleValue: () =>
+                        "transaction-select__single-value",
+                    input: () =>
+                        "transaction-select__input-container",
+                    menu: () =>
+                        "transaction-select__menu",
+                    option: (state) =>
+                        state.isFocused
+                            ? "transaction-select__option transaction-select__option--is-focused"
+                            : state.isSelected
+                                ? "transaction-select__option transaction-select__option--is-selected"
+                                : "transaction-select__option",
+                    indicatorSeparator: () =>
+                        null,
+                    dropdownIndicator: () =>
+                        "transaction-select__dropdown-indicator",
+                }}
+            />
 
             <div className="transaction-filter-actions">
                 <button

@@ -63,7 +63,9 @@
             return monthlySummary;
         }
 
-        private DateRangeModal GetDateRange(IEnumerable<TransactionEntity> transactions, DateRangeModal dateRange)
+        private DateRangeModal GetDateRange(
+     IEnumerable<TransactionEntity> transactions,
+     DateRangeModal dateRange)
         {
             if (dateRange.FromDate.HasValue)
             {
@@ -75,10 +77,9 @@
                         1),
 
                     ToDate = new DateTime(
-                        dateRange.ToDate!.Value.Year,
-                        dateRange.ToDate.Value.Month,
+                        dateRange.ToDate!.Value.AddDays(-1).Year,
+                        dateRange.ToDate.Value.AddDays(-1).Month,
                         1)
-                        .AddMonths(-1)
                 };
             }
 

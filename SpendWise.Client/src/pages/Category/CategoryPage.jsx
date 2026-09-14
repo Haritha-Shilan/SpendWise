@@ -13,6 +13,7 @@ function CategoryPage({ basePath }) {
         addCategory,
         isSaving,
         saveError,
+        clearSaveError,
         editCategory,
         toggleCategoryState
     } = useCategories(basePath);
@@ -40,12 +41,14 @@ function CategoryPage({ basePath }) {
     );
 
     const handleAddCategory = () => {
+        clearSaveError();
         setSelectedCategory(null);
         setIsFormOpen(true);
     };
 
 
     const handleEditCategory = (category) => {
+        clearSaveError();
         setSelectedCategory(category);
         setIsFormOpen(true);
     };
@@ -53,6 +56,7 @@ function CategoryPage({ basePath }) {
     const handleCancel = () => {
         setIsFormOpen(false);
         setSelectedCategory(null);
+        clearSaveError();
     };
 
     const handleSaveCategory = async (formData) => {
@@ -173,6 +177,7 @@ function CategoryPage({ basePath }) {
                     onCancel={handleCancel}
                     onSubmit={handleSaveCategory}
                     isSaving={isSaving}
+                    clearSaveError={clearSaveError}
                     saveError={saveError}
                     defaultTypeId={selectedTypeId}
                 />
