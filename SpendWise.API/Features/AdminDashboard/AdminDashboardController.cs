@@ -23,5 +23,7 @@ public class AdminDashboardController : ControllerBase
             ServiceResultStatus.Success => Ok(result.Data),
             _ => BadRequest(result.Error)
         };
+
+        //added a comment for CI testing
     }
 }
