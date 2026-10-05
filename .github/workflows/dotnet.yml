@@ -15,7 +15,7 @@ jobs:
 
       - run: dotnet restore SpendWise.API/SpendWise.API.csproj
 
-      - run: dotnet build SpendWise.API/SpendWise.API.csproj --no--restore
+      - run: dotnet build SpendWise.API/SpendWise.API.csproj --no-restore
 
       
       
