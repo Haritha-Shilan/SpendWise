@@ -25,5 +25,6 @@ public class AdminDashboardController : ControllerBase
         };
 
         //added a comment for CI testing
+        //added 2nd comemnt
     }
 }
