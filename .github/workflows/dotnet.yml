@@ -1,7 +1,19 @@
 name: SpendWise CI
 
 on: 
-  push: 
+  push:
+    paths:
+      - 'SpendWise.API/**'
+      - 'SpendWise.Infrastructure/**'
+      - 'SpendWise.Domain/**'
+      - '.github/workflows/dotnet.yml'
+
+  pull_request:
+    paths:
+      - 'SpendWise.API/**'
+      - 'SpendWise.Infrastructure/**'
+      - 'SpendWise.Domain/**'
+      - '.github/workflows/dotnet.yml'
 
 jobs:
   build:
